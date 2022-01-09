@@ -37,4 +37,20 @@ extension String {
         return self
     }
     
+    
+    /// 复制文本到剪贴板
+    public func copyToClipboard() {
+        guard self.count > 0 else {
+            return
+        }
+        #if targetEnvironment(macCatalyst)
+            // macOS 不支持
+            let pasteboard = NSPasteboard.general
+            pasteboard.declareTypes([.string], owner: nil)
+            pasteboard.setString(self, forType: .string)
+        #else
+            UIPasteboard.general.setValue(self, forPasteboardType: "public.plain-text")
+        #endif
+    }
+    
 }

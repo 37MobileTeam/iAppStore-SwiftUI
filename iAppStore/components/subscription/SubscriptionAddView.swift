@@ -21,7 +21,6 @@ struct SubscriptionAddView: View {
     @Binding var isAddPresented: Bool
     @StateObject var subModel: AppSubscripeModel
     @State private var subscripeType = 0
-    @State private var subscripeIndex = 0 //记录当前选择的状态
     @State private var appleIdText: String = ""
     @State private var regionName: String = "中国"
     @State private var filterViewIsExpanded = false
@@ -57,12 +56,11 @@ struct SubscriptionAddView: View {
                                     Text("应用下架").tag(2)
                                 }
                                 .pickerStyle(.segmented)
-                                .onReceive([self.subscripeType].publisher.first()) { (value) in
+                                .onChange(of: self.subscripeType) { [subscripeType] (newValue) in
                                     // 切换时，清空临时数据
-                                    if value != subscripeIndex, appModel.app != nil {
+                                    if newValue != subscripeType, appModel.app != nil {
                                         appModel.app = nil
                                     }
-                                    subscripeIndex = value
                                 }
                     Spacer()
                 }.padding(.bottom, 15)
@@ -72,7 +70,7 @@ struct SubscriptionAddView: View {
                     Text("App 地区：").font(.footnote)
                     
                     Button(action: {
-                        filterViewIsExpanded = !filterViewIsExpanded
+                        filterViewIsExpanded.toggle()
                     }) {
                         HStack {
                             Image(systemName: "line.3.horizontal.decrease.circle").imageScale(.medium)

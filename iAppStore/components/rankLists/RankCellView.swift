@@ -72,6 +72,7 @@ struct RankCellView: View {
                 }
             }
         }
+        .contextMenu { AppContextMenu(appleID: item.id.attributes.imID, bundleID: item.id.attributes.imBundleID, appUrl: item.id.label) }
     }
 }
 

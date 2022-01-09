@@ -15,6 +15,7 @@ struct ImageLoaderView<Placeholder: View, ConfiguredImage: View>: View {
     var url: String?
     private let placeholder: () -> Placeholder
     private let image: (Image) -> ConfiguredImage
+    private let completion: ((UIImage) -> Void)?
 
     @ObservedObject var imageLoader: ImageLoaderService
     @State var imageData: UIImage?
@@ -22,13 +23,15 @@ struct ImageLoaderView<Placeholder: View, ConfiguredImage: View>: View {
     init(
         url: String?,
         @ViewBuilder placeholder: @escaping () -> Placeholder,
-        @ViewBuilder image: @escaping (Image) -> ConfiguredImage
+        @ViewBuilder image: @escaping (Image) -> ConfiguredImage,
+        completion: ((UIImage) -> Void)? = nil
     ) {
         
         self.url = url
         self.placeholder = placeholder
         self.image = image
         self.imageLoader = ImageLoaderService(url: URL(string: url ?? "http://apple.com")!)
+        self.completion = completion
     }
 
     @ViewBuilder private var imageContent: some View {
@@ -43,6 +46,7 @@ struct ImageLoaderView<Placeholder: View, ConfiguredImage: View>: View {
         imageContent
             .onReceive(imageLoader.$image) { imageData in
                 self.imageData = imageData
+                completion?(imageData)
             }
     }
 }
@@ -56,10 +60,17 @@ class ImageLoaderService: ObservableObject {
     }
 
     func loadImage(for url: URL) {
-        let task = URLSession.shared.dataTask(with: url) { data, _, _ in
-            guard let data = data else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, res, error in
+            guard error == nil else {
+                return
+            }
+
+            guard let data = data, let image = UIImage(data: data) else {
+                return
+            }
+            
             DispatchQueue.main.async {
-                self.image = UIImage(data: data) ?? UIImage()
+                self.image = image
             }
         }
         task.resume()

@@ -47,7 +47,7 @@ struct AppDetailContentView: View {
             .alert(item: $alertType) { type in
                 switch type {
                 case .copyBundleId:
-                    UIPasteboard.general.setValue(appModel.app?.bundleId ?? "", forPasteboardType: "public.plain-text")
+                    appModel.app?.bundleId.copyToClipboard()
                     return Alert(title: Text("提示"), message: Text("包名内容复制成功！"), dismissButton: .default(Text("OK")))
                 }
             }
@@ -282,14 +282,32 @@ struct AppDetailBigImageShowView: View {
     
     @Binding var selectedShot: Bool
     @Binding var selectedImgUrl: String?
+    @State var showSheet = false
+    @State private var shareImage: UIImage?
     
     var body: some View {
         HStack {
+            Button {
+                showSheet.toggle()
+            } label: {
+                Image(systemName: "square.and.arrow.up").imageScale(.large)
+            }
+            .frame(width: 60, height: 60, alignment: .center)
+            .padding([.top, .leading], 8)
+            .sheet(isPresented: $showSheet) {
+                // Warn: a temporary solution
+                if let data = NSData(contentsOf: URL(string: selectedImgUrl!)!),
+                   let img = UIImage(data: data as Data) {
+                    ShareSheet(items: [img])
+                }
+            }
+            
             Spacer()
+            
             Button {
                 selectedShot = false
             } label: {
-                Image(systemName: "xmark.circle").font(.title)
+                Image(systemName: "xmark.circle").imageScale(.large)
             }
             .frame(width: 60, height: 60, alignment: .center)
             .padding([.top, .trailing], 8)
@@ -309,6 +327,12 @@ struct AppDetailBigImageShowView: View {
                     .scaledToFit()
                     .cornerRadius(15)
                     .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.gray, lineWidth: 0.1))
+            },
+            completion: { img in
+                DispatchQueue.main.async{
+                    shareImage = img
+                }
+                
             }
         ).padding([.leading, .trailing], 5)
         

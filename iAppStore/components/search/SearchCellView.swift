@@ -72,6 +72,7 @@ struct SearchCellView: View {
                 }
             }
         }
+        .contextMenu { AppContextMenu(appleID: String(item.trackId), bundleID: item.bundleId, appUrl: item.trackViewUrl) }
     }
 }
 

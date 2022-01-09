@@ -10,9 +10,9 @@ import SwiftUI
 
 struct RankHome: View {
     
-    @State var rankName: String = "热门免费榜"
-    @State var categoryName: String = "所有 App"
-    @State var regionName: String = "中国"
+    @AppStorage("kRankTypeName") private var rankName: String = "热门免费榜"
+    @AppStorage("kRankCategoryName") private var categoryName: String = "所有 App"
+    @AppStorage("kRankRegionName") private var regionName: String = "中国"
     @StateObject private var appRankModel = AppRankModel()
     
     //@State private var isSettingPresented = false

@@ -66,7 +66,7 @@ struct SettingItemCell: View {
                 #if targetEnvironment(macCatalyst)
                     // macOS 不支持
                 #else
-                    iconViewIsExpanded = !iconViewIsExpanded
+                    iconViewIsExpanded.toggle()
                 #endif
                     break
                 case 1:

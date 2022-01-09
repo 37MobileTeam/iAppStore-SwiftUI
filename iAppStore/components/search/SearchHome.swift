@@ -13,7 +13,7 @@ struct SearchHome: View {
     
     @State private var isSearching = false
     @State private var searchText = ""
-    @State private var regionName: String = "中国"
+    @AppStorage("kSearchRegionName") private var regionName: String = "中国"
     @State private var filterViewIsExpanded = false
     @StateObject private var appModel = AppDetailModel()
     
@@ -65,7 +65,7 @@ struct SearchHome: View {
     
     private var filterButton: some View {
         Button(action: {
-            filterViewIsExpanded = !filterViewIsExpanded
+            filterViewIsExpanded.toggle()
         }) {
             HStack {
                 Image(systemName: "line.3.horizontal.decrease.circle").imageScale(.medium)
