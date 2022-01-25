@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import CryptoKit
 
 extension String {
     
@@ -53,4 +54,12 @@ extension String {
         #endif
     }
     
+}
+
+extension String {
+    var md5: String {
+        let computed = Insecure.MD5.hash(data: self.data(using: .utf8)!)
+        return computed.map { String(format: "%02hhx", $0) }
+            .joined()
+    }
 }

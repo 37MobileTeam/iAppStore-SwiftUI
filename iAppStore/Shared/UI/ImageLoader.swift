@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 // refer: https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui
 
@@ -53,26 +54,39 @@ struct ImageLoaderView<Placeholder: View, ConfiguredImage: View>: View {
 
 class ImageLoaderService: ObservableObject {
     @Published var image = UIImage()
-
-    convenience init(url: URL) {
-        self.init()
-        loadImage(for: url)
+    
+    private var imageSubscription: AnyCancellable?
+    private let fileManager = LocalFileManager.instance
+    private let folderName: String = "iAppStore_images"
+    private let url: URL
+    
+    init(url: URL) {
+        self.url = url
+        loadImage()
     }
-
-    func loadImage(for url: URL) {
-        let task = URLSession.shared.dataTask(with: url) { data, res, error in
-            guard error == nil else {
-                return
-            }
-
-            guard let data = data, let image = UIImage(data: data) else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.image = image
-            }
+    
+    private func loadImage() {
+        if let savedImage = fileManager.getImage(imageName: url.path.md5, folderName: folderName) {
+//            print("get saved image: \(url)")
+            image = savedImage
+        } else {
+//            print("download image: \(url)")
+            downloadImage()
         }
-        task.resume()
+    }
+    
+    private func downloadImage() {
+        imageSubscription = NetworkingManager.download(url: url)
+            .tryMap({ (data) -> UIImage? in
+                return UIImage(data: data)
+            })
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: NetworkingManager.handleCompletion, receiveValue: { [weak self] (returnedImage) in
+                guard let self = self, let downloadedImage = returnedImage else { return }
+                
+                self.image = downloadedImage
+                self.imageSubscription?.cancel()
+                self.fileManager.saveImage(image: downloadedImage, imageName: self.url.path.md5, folderName: self.folderName)
+            })
     }
 }
