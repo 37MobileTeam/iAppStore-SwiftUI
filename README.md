@@ -9,13 +9,12 @@ iAppStroe 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 - 3、支持苹果所有国家和地区的商店，无需切换 Apple Id，即可查看！
 
 
-> 近期会更新一篇文章，介绍项目背景和开发过程的总结。敬请期待~
-
+> 本项目的背景，可以通过链接了解：[用 SwiftUI 实现一个开源的 App Store - 掘金](https://juejin.cn/post/7051512478630412301)
 
 ## 编译
 
 - 支持 iOS 14 以上
-- 支持 macOS 10.15 以上
+- 支持 macOS 11 以上
 
 
 **运行方法：**
@@ -27,6 +26,8 @@ iAppStroe 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 
 ## 效果示例
 
+**iOS**
+
 <img src="screenshot/01.png" width="400" height:auto alt="screenshot/01.png"/>
 <img src="screenshot/02.png" width="400" height:auto alt="screenshot/02.png"/>
 <img src="screenshot/03.png" width="400" height:auto alt="screenshot/03.png"/>
@@ -35,6 +36,10 @@ iAppStroe 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 <img src="screenshot/06.png" width="400" height:auto alt="screenshot/06.png"/>
 <img src="screenshot/07.png" width="400" height:auto alt="screenshot/07.png"/>
 
+**macOS**
+
+<img src="screenshot/08.png" width="400" height:auto alt="screenshot/08.png"/>
+<img src="screenshot/09.png" width="400" height:auto alt="screenshot/09.png"/>
 
 ### TODO
 

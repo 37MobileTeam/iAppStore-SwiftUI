@@ -124,7 +124,9 @@ struct RankSortView: View {
                                 }
                             }
                         }
-                    }.frame(maxHeight: 210)
+                    }
+                    .background(Color.tsmg_systemBackground)
+                    .frame(maxHeight: 210)
                 },
                 label: { HStack{
                     Spacer()
@@ -181,6 +183,9 @@ struct RankSortView: View {
                     Spacer()
                 } }
             ).buttonStyle(PlainButtonStyle()).accentColor(.clear)
+        }.onDisappear() {
+            sortViewIsExpanded = false
+            currentSortType = .noneType
         }
     }
 }

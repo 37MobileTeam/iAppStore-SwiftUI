@@ -15,44 +15,40 @@ struct RankHome: View {
     @AppStorage("kRankRegionName") private var regionName: String = "中国"
     @StateObject private var appRankModel = AppRankModel()
     
-    //@State private var isSettingPresented = false
-    
     var body: some View {
         NavigationView {
             Group {
-                Text(appRankModel.rankUpdated).font(.footnote)
-                
-                RankSortView(rankName: $rankName, categoryName: $categoryName, regionName: $regionName) { rankName, categoryName, regionName in
-                    appRankModel.fetchRankData(rankName, categoryName, regionName)
-                }
-                
-                
-                if appRankModel.results.count == 0 {
-                    VStack() {
-                        Spacer()
-                        Image(systemName: "tray.and.arrow.down")
-                            .font(Font.system(size: 60))
-                            .foregroundColor(Color.tsmg_tertiaryLabel)
-                        Spacer()
-                    }
-                } else {
-                    List {
-                        ForEach(appRankModel.results, id: \.imName.label) { item in
-                            let index = appRankModel.results.firstIndex { $0.imName.label == item.imName.label }
-                            NavigationLink(destination: AppDetailView(appId: item.id.attributes.imID, regionName: regionName, item: item)) {
-                                RankCellView(index: index ?? 0, item: item).frame(height: 110)
-                            }
+                ZStack(alignment: .top) {
+                    
+                    if appRankModel.results.count == 0 {
+                        VStack() {
+                            Spacer()
+                            Image(systemName: "tray.and.arrow.down")
+                                .font(Font.system(size: 60))
+                                .foregroundColor(Color.tsmg_tertiaryLabel)
+                            Spacer()
+                        }
+                    } else {
+                        
+                        VStack() {
+                            
+                            List {
+                                ForEach(appRankModel.results, id: \.imName.label) { item in
+                                    let index = appRankModel.results.firstIndex { $0.imName.label == item.imName.label }
+                                    NavigationLink(destination: AppDetailView(appId: item.id.attributes.imID, regionName: regionName, item: item)) {
+                                        RankCellView(index: index ?? 0, item: item).frame(height: 110)
+                                    }
+                                }
+                            }.padding(.top, 75)
                         }
                     }
-                }
+                    
+                    stickyHeaderView
+                }.background(Color.clear)
                 
             }
             .navigationBarTitle(appRankModel.rankTitle, displayMode: .inline)
-            .navigationBarItems(trailing:
-                                    HStack {
-//                                        filterButton
-                                    })
-            //.sheet(isPresented: $isSettingPresented, content: { RankFilterForm() })
+            
         }.onAppear {
             
             if appRankModel.results.count == 0 {
@@ -61,17 +57,53 @@ struct RankHome: View {
         }
     }
     
-//    private var filterButton: some View {
-//        Button(action: {
-//            self.isSettingPresented = true
-//        }) {
-//            HStack {
-//                Image(systemName: "line.3.horizontal.decrease.circle").imageScale(.medium)
-//            }.frame(width: 30, height: 30)
-//        }
-//    }
+    /// 筛选栏
+    var stickyHeaderView: some View {
+        ZStack(alignment: .top) {
+            
+//            VStack {
+//                BlurView(style: .light).frame(height: 75)
+//                Spacer()
+//            }
+            
+            VStack {
+                Spacer().frame(height: 10)
+
+                Text(appRankModel.rankUpdated).font(.footnote)
+
+                RankSortView(rankName: $rankName, categoryName: $categoryName, regionName: $regionName) { rankName, categoryName, regionName in
+                    appRankModel.fetchRankData(rankName, categoryName, regionName)
+                }.background(Color.clear)
+
+                Spacer()
+            }
+        }
+    }
 }
 
+//struct BlurView: UIViewRepresentable {
+//
+//    let style: UIBlurEffect.Style
+//
+//    func makeUIView(context: UIViewRepresentableContext<BlurView>) -> UIView {
+//        let view = UIView(frame: .zero)
+//        view.backgroundColor = .clear
+//        let blurEffect = UIBlurEffect(style: style)
+//        let blurView = UIVisualEffectView(effect: blurEffect)
+//        blurView.translatesAutoresizingMaskIntoConstraints = false
+//        view.insertSubview(blurView, at: 0)
+//        NSLayoutConstraint.activate([
+//            blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
+//            blurView.widthAnchor.constraint(equalTo: view.widthAnchor),
+//        ])
+//        return view
+//    }
+//
+//    func updateUIView(_ uiView: UIView,
+//                      context: UIViewRepresentableContext<BlurView>) {
+//
+//    }
+//}
 
 //struct RankHome_Previews: PreviewProvider {
 //    static var previews: some View {

@@ -59,82 +59,70 @@ struct SettingItemCell: View {
     @State private var icons: [String] = ["", "37", "37iOS", "37AppStore", "Apple", "AppleRainbow"]
     
     var body: some View {
-        HStack {
-            Button(action: {
-                switch index {
-                case 0:
-                #if targetEnvironment(macCatalyst)
-                    // macOS 不支持
-                #else
-                    iconViewIsExpanded.toggle()
-                #endif
-                    break
-                case 1:
-                    let url = URL(string: "itms-apps://itunes.apple.com")
-                    UIApplication.shared.open(url!)
-                case 2:
-                    linkPage = LinkString(url: "https://www.chandashi.com")
-                case 3:
-                    linkPage = LinkString(url: "https://app.diandian.com")
-                case 4:
-                    linkPage = LinkString(url: "https://www.qimai.cn")
-                case 5:
-                    linkPage = LinkString(url: "https://github.com/37iOS/iAppStore-SwiftUI")
-                case 6:
-                    linkPage = LinkString(url: "https://juejin.cn/user/1002387318511214")
-                default: break
-                }
-            }) {
-                Text(title).foregroundColor(Color.tsmg_label)
-            }
-            
-            Spacer()
-            
-            if iconViewIsExpanded {
-                Image(systemName: "chevron.down").imageScale(.small).foregroundColor(Color.tsmg_placeholderText)
-            } else {
-                Image(systemName: "chevron.right").imageScale(.small).foregroundColor(Color.tsmg_placeholderText)
-            }
-        }
-        .padding([.top, .bottom], 10)
-        
-        if iconViewIsExpanded {
-            VStack{
-                ScrollView {
-                    ForEach(0..<icons.count){ index in
-                        let type = icons[index]
-                        VStack{
-                            HStack {
-                                Image(type.count > 0 ? type + "_icon" : "iAppStroe_icon")
-                                    .resizable()
-                                    .renderingMode(.original)
-                                    .frame(width: 65, height: 65)
-                                    .cornerRadius(15)
-                                    .padding(.bottom, 10)
-                                    .padding(.leading, 5)
-                                
-                                Text((type.count > 0 ? type : "默认") + "图标").padding(.leading, 15)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right").imageScale(.small).foregroundColor(Color.tsmg_placeholderText).padding(.trailing, 10)
-                            }
+    
+        if index == 0 {
+            DisclosureGroup(title, isExpanded: $iconViewIsExpanded) {
+                ForEach(0..<icons.count){ index in
+                    let type = icons[index]
+                    VStack{
+                        HStack {
+                            Image(type.count > 0 ? type + "_icon" : "iAppStroe_icon")
+                                .resizable()
+                                .renderingMode(.original)
+                                .frame(width: 65, height: 65)
+                                .cornerRadius(15)
+                                .padding(.bottom, 10)
+                                .padding(.leading, 5)
                             
-                            Divider().padding(.leading, 12).padding(.trailing, 8).padding(.bottom, 10)
+                            Text((type.count > 0 ? type : "默认") + "图标").padding(.leading, 15)
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right").imageScale(.small).foregroundColor(Color.tsmg_placeholderText).padding(.trailing, 10)
                         }
-                        .background(Color.tsmg_systemBackground)
-                        .onTapGesture {
-                            
-                            UIApplication.shared.setAlternateIconName(type.count > 0 ? type : nil)
-                            
-                            withAnimation{
-                                iconViewIsExpanded = false
-                            }
-                        }
+                    }
+                    .background(Color.tsmg_systemBackground)
+                    .onTapGesture {
                         
+                        UIApplication.shared.setAlternateIconName(type.count > 0 ? type : nil)
+                        
+                        withAnimation{
+                            iconViewIsExpanded = false
+                        }
                     }
                 }
-            }.frame(maxHeight: 260)
+            }.accentColor(Color.tsmg_placeholderText)
+        } else {
+            
+            HStack {
+                Button(action: {
+                    switch index {
+                    case 0:
+                        break
+                    case 1:
+                        let url = URL(string: "itms-apps://itunes.apple.com")
+                        UIApplication.shared.open(url!)
+                    case 2:
+                        linkPage = LinkString(url: "https://www.chandashi.com")
+                    case 3:
+                        linkPage = LinkString(url: "https://app.diandian.com")
+                    case 4:
+                        linkPage = LinkString(url: "https://www.qimai.cn")
+                    case 5:
+                        linkPage = LinkString(url: "https://github.com/37iOS/iAppStore-SwiftUI")
+                    case 6:
+                        linkPage = LinkString(url: "https://juejin.cn/user/1002387318511214")
+                    default: break
+                    }
+                }) {
+                    Text(title).foregroundColor(Color.tsmg_label)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right").imageScale(.small).foregroundColor(Color.tsmg_placeholderText)
+            }
+            .padding([.top, .bottom], 10)
         }
     }
 }

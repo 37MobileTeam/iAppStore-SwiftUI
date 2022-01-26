@@ -16,7 +16,7 @@ extension String {
     /// 处理苹果图片尺寸
     /// 类似： https://is1-ssl.mzstatic.com/image/thumb/PurpleSource124/v4/16/0a/18/160a1889-5d30-9ef1-09fd-cacd97f5f0bd/96e99d1b-6a47-4c78-a570-4b7682c5c9df_img5_5_0_zh-Hans.png/392x696bb.png
     /// - Parameter scale: 缩放比例
-    /// - Returns: 
+    /// - Returns: 缩放后的 url
     public func imageAppleScale(_ scale: Double = UIScreen.main.scale) -> String {
   
         if let url = URL(string: self) {
@@ -44,14 +44,8 @@ extension String {
         guard self.count > 0 else {
             return
         }
-        #if targetEnvironment(macCatalyst)
-            // macOS 不支持
-            let pasteboard = NSPasteboard.general
-            pasteboard.declareTypes([.string], owner: nil)
-            pasteboard.setString(self, forType: .string)
-        #else
-            UIPasteboard.general.setValue(self, forPasteboardType: "public.plain-text")
-        #endif
+
+        UIPasteboard.general.string = self
     }
     
 }

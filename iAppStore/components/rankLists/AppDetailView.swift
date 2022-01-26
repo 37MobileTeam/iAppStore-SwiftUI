@@ -19,22 +19,11 @@ struct AppDetailView: View {
 //    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        NavigationView {
-            Group {
-                AppDetailContentView(appModel: appModel)
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Link(destination: URL(string: appModel.app?.trackViewUrl ?? item?.id.label ?? "https://apple.com")!) {
-                        Image(systemName: "link.circle.fill").font(.subheadline)
-                        Text("App Store")
-                    }
-                }
-            }
+        
+        Group {
+            AppDetailContentView(appModel: appModel)
         }
-        .navigationBarTitle(item?.imName.label ?? appModel.app?.trackName ?? "")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle(item?.imName.label ?? appModel.app?.trackName ?? "", displayMode: .large)
         .navigationBarBackButtonHidden(false)
 //        .navigationBarItems(leading:
 //            Button(action: {
@@ -44,6 +33,10 @@ struct AppDetailView: View {
 //                        Image(systemName: "chevron.backward")
 //                    }
 //            })
+        .navigationBarItems(trailing:
+            Link(destination: URL(string: appModel.app?.trackViewUrl ?? item?.id.label ?? "https://apple.com")!) {
+                Image(systemName: "paperplane").font(.subheadline)
+        })
         .onAppear {
             if appModel.app == nil {
                 appModel.searchAppData(appId, nil, regionName)
