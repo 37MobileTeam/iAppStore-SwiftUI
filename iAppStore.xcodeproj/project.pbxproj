@@ -130,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				6C51176B27A00D9C00D5E21D /* LocalFileManager.swift */,
-				6C51176D27A00DAC00D5E21D /* NetworkManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -309,6 +308,7 @@
 		6DB3B792277D76F500E8626F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				6C51176D27A00DAC00D5E21D /* NetworkManager.swift */,
 				6DB3B793277D770F00E8626F /* APIService.swift */,
 			);
 			path = Network;
