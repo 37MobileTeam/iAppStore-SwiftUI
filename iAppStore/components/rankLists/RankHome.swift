@@ -19,13 +19,17 @@ struct RankHome: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .top) {
-                if appRankModel.results.count == 0 {
-                    emptyView
+                if appRankModel.isLoading {
+                    LoadingView()
                 } else {
-                    VStack() {
-                        listView
+                    if appRankModel.results.count == 0 {
+                        emptyView
+                    } else {
+                        VStack() {
+                            listView
+                        }
+                        .padding(.top, 75)
                     }
-                    .padding(.top, 75)
                 }
                 
                 stickyHeaderView
