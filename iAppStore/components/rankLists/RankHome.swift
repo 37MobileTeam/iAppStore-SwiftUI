@@ -14,45 +14,61 @@ struct RankHome: View {
     @AppStorage("kRankCategoryName") private var categoryName: String = "所有 App"
     @AppStorage("kRankRegionName") private var regionName: String = "中国"
     @StateObject private var appRankModel = AppRankModel()
+    @State var isShowAlert = false
     
     var body: some View {
         NavigationView {
-            Group {
-                ZStack(alignment: .top) {
-                    
-                    if appRankModel.results.count == 0 {
-                        VStack() {
-                            Spacer()
-                            Image(systemName: "tray.and.arrow.down")
-                                .font(Font.system(size: 60))
-                                .foregroundColor(Color.tsmg_tertiaryLabel)
-                            Spacer()
-                        }
-                    } else {
-                        
-                        VStack() {
-                            
-                            List {
-                                ForEach(appRankModel.results, id: \.imName.label) { item in
-                                    let index = appRankModel.results.firstIndex { $0.imName.label == item.imName.label }
-                                    NavigationLink(destination: AppDetailView(appId: item.id.attributes.imID, regionName: regionName, item: item)) {
-                                        RankCellView(index: index ?? 0, item: item).frame(height: 110)
-                                    }
-                                }
-                            }.padding(.top, 75)
-                        }
+            ZStack(alignment: .top) {
+                if appRankModel.results.count == 0 {
+                    emptyView
+                } else {
+                    VStack() {
+                        listView
                     }
-                    
-                    stickyHeaderView
-                }.background(Color.clear)
+                    .padding(.top, 75)
+                }
                 
+                stickyHeaderView
+            }
+            .background(Color.clear)
+            .alert(isPresented: $appRankModel.isShowAlert) {
+                Alert(title: Text("Error"), message: Text(appRankModel.alertMsg))
             }
             .navigationBarTitle(appRankModel.rankTitle, displayMode: .inline)
-            
+        
         }.onAppear {
-            
             if appRankModel.results.count == 0 {
                 appRankModel.fetchRankData(rankName, categoryName, regionName)
+            }
+        }
+    }
+}
+
+extension RankHome {
+    var emptyView: some View {
+        VStack() {
+            Spacer()
+            Image(systemName: "tray.and.arrow.down")
+                .font(Font.system(size: 60))
+                .foregroundColor(Color.tsmg_tertiaryLabel)
+            Spacer()
+        }
+    }
+    
+    var listView: some View {
+        List {
+            ForEach(appRankModel.results, id: \.imName.label) { item in
+                let index = appRankModel.results.firstIndex { $0.imName.label == item.imName.label }
+                
+                NavigationLink(
+                    destination: AppDetailView(
+                        appId: item.id.attributes.imID,
+                        regionName: regionName, item: item
+                    )
+                ) {
+                    RankCellView(index: index ?? 0, item: item)
+                        .frame(height: 110)
+                }
             }
         }
     }
@@ -60,12 +76,7 @@ struct RankHome: View {
     /// 筛选栏
     var stickyHeaderView: some View {
         ZStack(alignment: .top) {
-            
-//            VStack {
-//                BlurView(style: .light).frame(height: 75)
-//                Spacer()
-//            }
-            
+                
             VStack {
                 Spacer().frame(height: 10)
 
@@ -110,3 +121,6 @@ struct RankHome: View {
 //        RankHome()
 //    }
 //}
+
+
+

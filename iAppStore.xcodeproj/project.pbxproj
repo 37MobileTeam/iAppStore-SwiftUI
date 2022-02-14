@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6C51176C27A00D9C00D5E21D /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51176B27A00D9C00D5E21D /* LocalFileManager.swift */; };
-		6C51176E27A00DAC00D5E21D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51176D27A00DAC00D5E21D /* NetworkManager.swift */; };
+		6C51177527A2755100D5E21D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51177327A2755000D5E21D /* NetworkManager.swift */; };
+		6C51177627A2755100D5E21D /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51177427A2755100D5E21D /* NetworkMonitor.swift */; };
 		6D26AAC2278420CB003F82BF /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26AAC1278420CB003F82BF /* AboutAppView.swift */; };
 		6D490E542782F35F00B5DD80 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D490E532782F35F00B5DD80 /* Strings.swift */; };
 		6D490E56278328E400B5DD80 /* SubscriptionAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D490E55278328E400B5DD80 /* SubscriptionAddView.swift */; };
@@ -62,7 +63,8 @@
 
 /* Begin PBXFileReference section */
 		6C51176B27A00D9C00D5E21D /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
-		6C51176D27A00DAC00D5E21D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6C51177327A2755000D5E21D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6C51177427A2755100D5E21D /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		6D26AAC1278420CB003F82BF /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		6D490E532782F35F00B5DD80 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		6D490E55278328E400B5DD80 /* SubscriptionAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAddView.swift; sourceTree = "<group>"; };
@@ -130,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				6C51176B27A00D9C00D5E21D /* LocalFileManager.swift */,
-				6C51176D27A00DAC00D5E21D /* NetworkManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -309,6 +310,8 @@
 		6DB3B792277D76F500E8626F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				6C51177327A2755000D5E21D /* NetworkManager.swift */,
+				6C51177427A2755100D5E21D /* NetworkMonitor.swift */,
 				6DB3B793277D770F00E8626F /* APIService.swift */,
 			);
 			path = Network;
@@ -454,6 +457,7 @@
 				6D89AF85277879190075E66F /* iAppStoreApp.swift in Sources */,
 				6D605A17278B15950001C69F /* ShareSheet.swift in Sources */,
 				6D95DC6B2780292800EE8B54 /* RankCellView.swift in Sources */,
+				6C51177627A2755100D5E21D /* NetworkMonitor.swift in Sources */,
 				6D738E2E2779736B00A4A76E /* SettingHome.swift in Sources */,
 				6D738E2A2779734700A4A76E /* SearchHome.swift in Sources */,
 				6DB3B791277D757400E8626F /* AppRank.swift in Sources */,
@@ -461,6 +465,7 @@
 				6DB3B70027799F6200E8626F /* AppDetailView.swift in Sources */,
 				6DB3B799277F036E00E8626F /* RankSortView.swift in Sources */,
 				6D95DC7027813A3500EE8B54 /* AppDetailContentView.swift in Sources */,
+				6C51177527A2755100D5E21D /* NetworkManager.swift in Sources */,
 				6DB3B78F277D756B00E8626F /* AppDetailModel.swift in Sources */,
 				6D490E5A27833C4D00B5DD80 /* AppSubscripeModel.swift in Sources */,
 				6D490E5827833B1C00B5DD80 /* AppSubscripe.swift in Sources */,
@@ -471,7 +476,6 @@
 				6D605A15278B15850001C69F /* AppContextMenu.swift in Sources */,
 				6DB3B782277D6CE700E8626F /* Constants.swift in Sources */,
 				6D490E56278328E400B5DD80 /* SubscriptionAddView.swift in Sources */,
-				6C51176E27A00DAC00D5E21D /* NetworkManager.swift in Sources */,
 				6D95DC6E27804AAD00EE8B54 /* AppDetail.swift in Sources */,
 				6D490E542782F35F00B5DD80 /* Strings.swift in Sources */,
 				6D26AAC2278420CB003F82BF /* AboutAppView.swift in Sources */,

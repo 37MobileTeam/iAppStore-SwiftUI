@@ -6,12 +6,47 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
 
 class AppRankModel: ObservableObject {
     
     @Published var rankTitle: String = "排行榜"
     @Published var rankUpdated: String = ""
     @Published var results: [AppRank] = []
+    
+    @Published var alertMsg: String = ""
+    @Published var isShowAlert: Bool = false
+    private var cancelable = Set<AnyCancellable>()
+    
+    init() {
+        self.addSubscriber()
+    }
+    
+    private func addSubscriber() {
+        NetworkStateChecker.shared.publisher
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { _ in
+                //
+            } receiveValue: { path in
+                switch path.status {
+                case .satisfied:
+                    self.isShowAlert = false
+                    print("network satisfied.")
+                case .unsatisfied:
+                    self.isShowAlert = true
+                    self.alertMsg = "Network unconnected."
+                    print("network unsatisfied.")
+                case .requiresConnection:
+                    self.isShowAlert = true
+                    self.alertMsg = "Network require connection."
+                    print("network require connection.")
+                @unknown default:
+                    fatalError()
+                }
+            }
+            .store(in: &cancelable)
+    }
     
     func fetchRankData(_ rankName: String, _ categoryName: String, _ regionName: String) {
         
@@ -49,7 +84,10 @@ class AppRankModel: ObservableObject {
                 self.results = response.feed.entry
                 self.rankTitle = response.feed.title.label.components(separatedBy: ["：", ":"]).last ?? "排行榜"
                 self.handleUpdated(response.feed.updated.label)
-            case .failure(_):
+            case .failure(let error):
+                print("api reqeust erro: \(error)")
+                self.isShowAlert = true
+                self.alertMsg = "\(error)";
                 break
             }
         }
