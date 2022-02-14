@@ -10,6 +10,7 @@
 		6C51176C27A00D9C00D5E21D /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51176B27A00D9C00D5E21D /* LocalFileManager.swift */; };
 		6C51177527A2755100D5E21D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51177327A2755000D5E21D /* NetworkManager.swift */; };
 		6C51177627A2755100D5E21D /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51177427A2755100D5E21D /* NetworkMonitor.swift */; };
+		6C9A423E27A637E60074FD09 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A423D27A637E60074FD09 /* LoadingView.swift */; };
 		6D26AAC2278420CB003F82BF /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26AAC1278420CB003F82BF /* AboutAppView.swift */; };
 		6D490E542782F35F00B5DD80 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D490E532782F35F00B5DD80 /* Strings.swift */; };
 		6D490E56278328E400B5DD80 /* SubscriptionAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D490E55278328E400B5DD80 /* SubscriptionAddView.swift */; };
@@ -65,6 +66,7 @@
 		6C51176B27A00D9C00D5E21D /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		6C51177327A2755000D5E21D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6C51177427A2755100D5E21D /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		6C9A423D27A637E60074FD09 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6D26AAC1278420CB003F82BF /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		6D490E532782F35F00B5DD80 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		6D490E55278328E400B5DD80 /* SubscriptionAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAddView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				6DB3B796277EEC7100E8626F /* ImageLoader.swift */,
+				6C9A423D27A637E60074FD09 /* LoadingView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				6DB3B78F277D756B00E8626F /* AppDetailModel.swift in Sources */,
 				6D490E5A27833C4D00B5DD80 /* AppSubscripeModel.swift in Sources */,
 				6D490E5827833B1C00B5DD80 /* AppSubscripe.swift in Sources */,
+				6C9A423E27A637E60074FD09 /* LoadingView.swift in Sources */,
 				6DB3B794277D770F00E8626F /* APIService.swift in Sources */,
 				6DB3B6FE27799AF200E8626F /* RankFilterForm.swift in Sources */,
 				6D738E322779743D00A4A76E /* Color.swift in Sources */,

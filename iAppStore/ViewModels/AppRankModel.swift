@@ -19,6 +19,8 @@ class AppRankModel: ObservableObject {
     @Published var isShowAlert: Bool = false
     private var cancelable = Set<AnyCancellable>()
     
+    @Published var isLoading: Bool = false
+    
     init() {
         self.addSubscriber()
     }
@@ -78,7 +80,12 @@ class AppRankModel: ObservableObject {
             endpoint = APIService.Endpoint.topFreeApplications(cid: categoryId, country: regionId, limit: 200)
         }
         
+        isLoading = true
+        
         APIService.shared.POST(endpoint: endpoint, params: nil) { (result: Result<AppRankM, APIService.APIError>) in
+            
+            self.isLoading = false
+            
             switch result {
             case let .success(response):
                 self.results = response.feed.entry

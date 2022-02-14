@@ -29,180 +29,227 @@ struct RankSortView: View {
 
     var body: some View {
         HStack{
-            
             DisclosureGroup(
                 isExpanded: $sortViewIsExpanded,
                 content: {
-                    VStack{
-                        Divider()
-                        if currentSortType == .rankType {
-                            ScrollView {
-                                ForEach(0..<TSMGConstants.rankingTypeLists.count){ index in
-                                    HStack{
-                                        let type = TSMGConstants.rankingTypeLists[index]
-                                        if type == rankName {
-                                            Text(type).padding(.horizontal).padding(.vertical, 5).foregroundColor(.blue)
-                                        } else {
-                                            Text(type).padding(.horizontal).padding(.vertical, 5)
-                                        }
-                                        Spacer()
-                                        if type == rankName {
-                                            Image(systemName: "checkmark").padding(.horizontal).padding(.vertical, 5).foregroundColor(.blue)
-                                        }
-                                    }
-                                    .background(Color.tsmg_systemBackground)
-                                    .onTapGesture {
-                                        currentSortType = .noneType
-                                        withAnimation{
-                                            let type = TSMGConstants.rankingTypeLists[index]
-                                            rankName = type
-                                            sortViewIsExpanded = false
-                                        }
-                                        if nil != action {
-                                            action!(rankName, categoryName, regionName)
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                        } else if currentSortType == .categoryType {
-                            ScrollView {
-                                ForEach(0..<TSMGConstants.categoryTypeLists.count){index in
-                                    HStack{
-                                        let type = TSMGConstants.categoryTypeLists[index]
-                                        if type == categoryName {
-                                            Text(type).padding(.horizontal).padding(.vertical, 5).foregroundColor(.blue)
-                                        } else {
-                                            Text(type).padding(.horizontal).padding(.vertical, 5)
-                                        }
-                                        Spacer()
-                                        if type == categoryName {
-                                            Image(systemName: "checkmark").padding(.horizontal).padding(.vertical, 5).foregroundColor(.blue)
-                                        }
-                                    }
-                                    .background(Color.tsmg_systemBackground)
-                                    .onTapGesture {
-                                        currentSortType = .noneType
-                                        withAnimation{
-                                            let type = TSMGConstants.categoryTypeLists[index]
-                                            categoryName = type
-                                            sortViewIsExpanded = false
-                                        }
-                                        if nil != action {
-                                            action!(rankName, categoryName, regionName)
-                                        }
-                                    }
-                                }
-                            }
-                        } else if currentSortType == .regionType {
-                            ScrollView {
-                                ForEach(0..<TSMGConstants.regionTypeLists.count){index in
-                                    HStack{
-                                        let type = TSMGConstants.regionTypeLists[index]
-                                        if type == regionName {
-                                            Text(type).padding(.horizontal).padding(.vertical, 5).foregroundColor(.blue)
-                                        } else {
-                                            Text(type).padding(.horizontal).padding(.vertical, 5)
-                                        }
-                                        Spacer()
-                                        if type == regionName {
-                                            Image(systemName: "checkmark").padding(.horizontal).padding(.vertical, 5).foregroundColor(.blue)
-                                        }
-                                    }
-                                    .background(Color.tsmg_systemBackground)
-                                    .onTapGesture {
-                                        currentSortType = .noneType
-                                        withAnimation{
-                                            let type = TSMGConstants.regionTypeLists[index]
-                                            regionName = type
-                                            sortViewIsExpanded = false
-                                        }
-                                        if nil != action {
-                                            action!(rankName, categoryName, regionName)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .background(Color.tsmg_systemBackground)
-                    .frame(maxHeight: 210)
+                    sortContents
                 },
-                label: { HStack{
-                    Spacer()
-                    HStack{
-                        Text(rankName)
-                        if currentSortType == .rankType {
-                            Image(systemName: "chevron.up")
-                        } else {
-                            Image(systemName: "chevron.down")
-                        }
-                    }.onTapGesture {
-                        if currentSortType == .rankType {
-                            sortViewIsExpanded = false
-                            currentSortType = .noneType
-                        } else {
-                            sortViewIsExpanded = true
-                            currentSortType = .rankType
-                        }
-                    }
-                    Spacer()
-                    HStack{
-                        Text(categoryName)
-                        if currentSortType == .categoryType {
-                            Image(systemName: "chevron.up")
-                        } else {
-                            Image(systemName: "chevron.down")
-                        }
-                    }.onTapGesture {
-                        if currentSortType == .categoryType {
-                            sortViewIsExpanded = false
-                            currentSortType = .noneType
-                        } else {
-                            sortViewIsExpanded = true
-                            currentSortType = .categoryType
-                        }
-                    }
-                    Spacer()
-                    HStack{
-                        Text(regionName)
-                        if currentSortType == .regionType {
-                            Image(systemName: "chevron.up")
-                        } else {
-                            Image(systemName: "chevron.down")
-                        }
-                    }.onTapGesture {
-                        if currentSortType == .regionType {
-                            sortViewIsExpanded = false
-                            currentSortType = .noneType
-                        } else {
-                            sortViewIsExpanded = true
-                            currentSortType = .regionType
-                        }
-                    }
-                    Spacer()
-                } }
-            ).buttonStyle(PlainButtonStyle()).accentColor(.clear)
-        }.onDisappear() {
+                label: {
+                    sortLabels
+                }
+            )
+            .buttonStyle(PlainButtonStyle())
+            .accentColor(.clear)
+        }
+        .onDisappear() {
             sortViewIsExpanded = false
             currentSortType = .noneType
         }
     }
 }
 
+// MARK: Sort Content
 
 extension RankSortView {
     
-    func selected(_ action: @escaping (_ rankName: String, _ categoryName: String, _ regionName: String) -> Void ) -> Self {
-        var copy = self
-        copy.action = action
-        return copy
+    var sortContents: some View {
+        VStack{
+            Divider()
+            
+            if currentSortType == .rankType {
+                rankContent
+            } else if currentSortType == .categoryType {
+                categoryContent
+            } else if currentSortType == .regionType {
+                regionContent
+            }
+        }
+        .background(Color.tsmg_systemBackground)
+        .frame(maxHeight: 210)
+    }
+    
+    var rankContent: some View {
+        ScrollView {
+            ForEach(0..<TSMGConstants.rankingTypeLists.count) { index in
+                buildSortListRow(index: index)
+            }
+        }
+    }
+    
+    var categoryContent: some View {
+        ScrollView {
+            ForEach(0..<TSMGConstants.categoryTypeLists.count) {index in
+                buildSortListRow(index: index)
+            }
+        }
+    }
+    
+    var regionContent: some View {
+        ScrollView {
+            ForEach(0..<TSMGConstants.regionTypeLists.count) {index in
+                buildSortListRow(index: index)
+            }
+        }
+    }
+       
+    func buildSortListRow(index: Int) -> some View {
+        HStack {
+            let (item, isSelected) = selectedItem(index: index)
+            if isSelected {
+                selectedItem(item: item)
+            } else {
+                unselectedItem(item: item)
+            }
+            Spacer()
+            if isSelected {
+                checkmarkImage
+            }
+        }
+        .background(Color.tsmg_systemBackground)
+        .onTapGesture {
+            onTapSortItem(index: index)
+        }
+    }
+    
+    func selectedItem(index: Int) -> (String, Bool) {
+        var itemArray: [String] = []
+        if currentSortType == .rankType {
+            itemArray = TSMGConstants.rankingTypeLists
+        } else if currentSortType == .categoryType {
+            itemArray = TSMGConstants.categoryTypeLists
+        } else if currentSortType == .regionType {
+            itemArray = TSMGConstants.regionTypeLists
+        }
+        if index >= itemArray.count {
+            return ("", false)
+        }
+        
+        if currentSortType == .rankType {
+            return (itemArray[index], itemArray[index] == rankName)
+        } else if currentSortType == .categoryType {
+            return (itemArray[index], itemArray[index] == categoryName)
+        } else if currentSortType == .regionType {
+            return (itemArray[index], itemArray[index] == regionName)
+        }
+        return ("", false)
+    }
+    
+    func onTapSortItem(index: Int) {
+        withAnimation {
+            if currentSortType == .rankType {
+                rankName = TSMGConstants.rankingTypeLists[index]
+            } else if currentSortType == .categoryType {
+                categoryName = TSMGConstants.categoryTypeLists[index]
+            } else if currentSortType == .regionType {
+                regionName = TSMGConstants.regionTypeLists[index]
+            }
+            
+            sortViewIsExpanded = false
+            currentSortType = .noneType
+            
+            if nil != action {
+                action!(rankName, categoryName, regionName)
+            }
+        }
+    }
+    
+    func selectedItem(item: String) -> some View {
+        Text(item)
+            .padding(.horizontal)
+            .padding(.vertical, 5)
+            .foregroundColor(.blue)
+    }
+    
+    func unselectedItem(item: String) -> some View {
+        Text(item)
+            .padding(.horizontal)
+            .padding(.vertical, 5)
+    }
+    
+    var checkmarkImage: some View {
+        Image(systemName: "checkmark")
+            .padding(.horizontal)
+            .padding(.vertical, 5)
+            .foregroundColor(.blue)
     }
 }
 
-//struct RankSortView_Previews: PreviewProvider {
-//
-//    static var previews: some View {
-//        RankSortView(rankName: $rankName, categoryName: $categoryName, regionName: $regionName)
-//    }
-//}
+// MARK: Sort Label
+extension RankSortView {
+    
+    var sortLabels: some View {
+        HStack {
+            Spacer()
+            rankLabel
+            Spacer()
+            categoryLabel
+            Spacer()
+            regionLabel
+            Spacer()
+        }
+    }
+    
+    var rankLabel: some View {
+        createSortLabel(type: .rankType)
+    }
+    
+    var categoryLabel: some View {
+        createSortLabel(type: .categoryType)
+    }
+    
+    var regionLabel: some View {
+        createSortLabel(type: .regionType)
+    }
+    
+    func createSortLabel(type: RankSortType) -> some View {
+        HStack {
+            switch type {
+            case .noneType:
+                Text("")
+            case .rankType:
+                Text(rankName)
+            case .categoryType:
+                Text(categoryName)
+            case .regionType:
+                Text(regionName)
+            }
+            
+            if currentSortType == type {
+                Image(systemName: "chevron.up")
+            } else {
+                Image(systemName: "chevron.down")
+            }
+        }
+        .onTapGesture {
+            if currentSortType == type {
+                sortViewIsExpanded = false
+                currentSortType = .noneType
+            } else {
+                sortViewIsExpanded = true
+                currentSortType = type
+            }
+        }
+    }
+}
+
+struct RankSortView_Previews: PreviewProvider {
+
+    static var previews: some View {
+        Group {
+            RankSortView(
+                rankName: .constant("热门免费榜"),
+                categoryName: .constant("所有APP"),
+                regionName: .constant("中国")
+            )
+                .preferredColorScheme(.dark)
+            
+            RankSortView(
+                rankName: .constant("热门免费榜"),
+                categoryName: .constant("所有APP"),
+                regionName: .constant("中国")
+            )
+                .preferredColorScheme(.light)
+                
+        }
+    }
+}
