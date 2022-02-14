@@ -28,22 +28,22 @@ iAppStroe 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 
 **iOS**
 
-<img src="screenshot/01.png" width="400" height:auto alt="screenshot/01.png"/>
-<img src="screenshot/02.png" width="400" height:auto alt="screenshot/02.png"/>
-<img src="screenshot/03.png" width="400" height:auto alt="screenshot/03.png"/>
-<img src="screenshot/04.png" width="400" height:auto alt="screenshot/04.png"/>
-<img src="screenshot/05.png" width="400" height:auto alt="screenshot/05.png"/>
-<img src="screenshot/06.png" width="400" height:auto alt="screenshot/06.png"/>
-<img src="screenshot/07.png" width="400" height:auto alt="screenshot/07.png"/>
+<img src="screenshot/01.png" width="300" height:auto alt="screenshot/01.png"/>
+<img src="screenshot/02.png" width="300" height:auto alt="screenshot/02.png"/>
+<img src="screenshot/03.png" width="300" height:auto alt="screenshot/03.png"/>
+<img src="screenshot/04.png" width="300" height:auto alt="screenshot/04.png"/>
+<img src="screenshot/05.png" width="300" height:auto alt="screenshot/05.png"/>
+<img src="screenshot/06.png" width="300" height:auto alt="screenshot/06.png"/>
+<img src="screenshot/07.png" width="300" height:auto alt="screenshot/07.png"/>
 
 **macOS**
 
-<img src="screenshot/08.png" width="400" height:auto alt="screenshot/08.png"/>
-<img src="screenshot/09.png" width="400" height:auto alt="screenshot/09.png"/>
+<img src="screenshot/08.png" width="800" height:auto alt="screenshot/08.png"/>
+<img src="screenshot/09.png" width="800" height:auto alt="screenshot/09.png"/>
 
 ### TODO
 
-1. [] 请求失败导致页面空白的处理
+1. [x] 请求失败导致页面空白的处理（2022-02-02）
 2. [] 数据请求可以按分页请求加载
 3. [] 筛选国家地区的条件按洲显示或者支持搜索
 4. [x] 筛选条件可以持久化保存（2022-01-09）
@@ -51,4 +51,16 @@ iAppStroe 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 6. [] 应用订阅状态持久化
 7. [] 多语言的支持（英文）
 
+### FAQ
 
+* [New Issue](https://github.com/37iOS/iAppStore-SwiftUI/issues)
+
+### Contributors 
+
+* [@iHTCboy](https://github.com/iHTCboy) 
+* [@chenxi92](https://github.com/chenxi92)
+
+
+### License
+
+iAppStroe is released under the GPL-3.0 license. [See LICENSE](https://github.com/37iOS/iAppStore-SwiftUI/blob/main/LICENSE) for details.
