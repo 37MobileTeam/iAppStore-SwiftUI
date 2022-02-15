@@ -18,6 +18,8 @@ struct AppSubscripe: Codable {
     let startTimeStamp: TimeInterval
     var endCheckTimeStamp: TimeInterval?
     let isFinished: Bool
+    let iconURL: String?
+    let trackName: String
     
     var startTime: String {
         let date = Date.init(timeIntervalSince1970: startTimeStamp)
@@ -37,8 +39,26 @@ struct AppSubscripe: Codable {
         }
     }
     
+    var artworkURL100: String {
+        guard let iconURL = iconURL else {
+            return "http://itunes.apple.com/favicon.ico"
+        }
+        return iconURL
+    }
+    
     static func updateModel(app: AppSubscripe, checkTime: TimeInterval, isFinished: Bool, _ newVersion: String?) -> AppSubscripe {
-        return AppSubscripe(appId: app.appId, regionName: app.regionName, subscripeType: app.subscripeType, currentVersion: app.currentVersion, newVersion: (newVersion != nil) ? newVersion : app.newVersion, startTimeStamp: app.startTimeStamp, endCheckTimeStamp: checkTime, isFinished: isFinished)
+        return AppSubscripe(
+            appId: app.appId,
+            regionName: app.regionName,
+            subscripeType: app.subscripeType,
+            currentVersion: app.currentVersion,
+            newVersion: (newVersion != nil) ? newVersion : app.newVersion,
+            startTimeStamp: app.startTimeStamp,
+            endCheckTimeStamp: checkTime,
+            isFinished: isFinished,
+            iconURL: app.iconURL,
+            trackName: app.trackName
+        )
     }
     
 }

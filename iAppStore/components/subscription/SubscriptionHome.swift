@@ -11,39 +11,49 @@ import SwiftUI
 struct SubscriptionHome: View {
     
     @State private var isAddPresented: Bool = false
-    @StateObject private var subModel = AppSubscripeModel.shared
+    @StateObject private var subscripeVM = AppSubscripeModel()
     
     var body: some View {
         NavigationView {
-            Group {
-                if subModel.subscripes.count == 0 {
+            VStack {
+                if subscripeVM.subscripes.count == 0 {
                     Spacer()
-                    Image(systemName: "tray")
-                        .font(Font.system(size: 60))
-                        .foregroundColor(Color.tsmg_tertiaryLabel)
+                    emptyImage
                 } else {
-                    List {
-                        ForEach(subModel.subscripes, id: \.startTimeStamp) { item in
-                            
-                            let index = subModel.subscripes.firstIndex { $0.startTimeStamp == item.startTimeStamp }
-                            NavigationLink(destination: AppDetailView(appId: String(item.appId), regionName: item.regionName, item: nil)) {
-                                
-                                SubscripteCellView(index: index ?? 0, item: item, app: subModel.apps[item.appId])
-                            }
-                        }
-                    }
+                    subscripeListView
                 }
                 Spacer()
             }
             .navigationBarTitle("订阅 App 状态")
             .navigationBarTitleDisplayMode(.automatic)
-            .navigationBarItems(trailing:
-                                    HStack {
-                                        addButton
-                                    })
+            .navigationBarItems(trailing: addButton )
             .sheet(isPresented: $isAddPresented, content: {
-                SubscriptionAddView(isAddPresented: $isAddPresented, subModel: subModel)
+                SubscriptionAddView(
+                    isAddPresented: $isAddPresented,
+                    subscripeVM: subscripeVM
+                )
             })
+        }
+    }
+    
+    private var emptyImage: some View {
+        Image(systemName: "tray")
+            .font(Font.system(size: 60))
+            .foregroundColor(Color.tsmg_tertiaryLabel)
+    }
+    
+    private var subscripeListView: some View {
+        List {
+            ForEach(subscripeVM.subscripes, id: \.startTimeStamp) { item in
+                NavigationLink(
+                    destination: AppDetailView(appId: String(item.appId), regionName: item.regionName, item: nil)
+                ) {
+                    SubscripteCellView(item: item)
+                }
+            }
+            .onDelete { indexSet in
+                subscripeVM.removeAt(indexSet: indexSet)
+            }
         }
     }
     
@@ -61,14 +71,12 @@ struct SubscriptionHome: View {
 
 
 struct SubscripteCellView: View {
-    var index: Int
     var item: AppSubscripe
-    var app: AppDetail?
     
     var body: some View {
         HStack {
             ImageLoaderView(
-                url: app?.artworkUrl100 ?? "http://itunes.apple.com/favicon.ico",
+                url: item.artworkURL100,
                 placeholder: {
                     Image("icon_placeholder")
                         .resizable()
@@ -89,23 +97,23 @@ struct SubscripteCellView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        Text(app?.trackName ?? "")
+                        Text(item.trackName)
                             .foregroundColor(.tsmg_secondaryLabel)
                             .font(.headline)
                             .lineLimit(2)
                             .truncationMode(.tail)
                         
                         Group {
-                        switch item.subscripeType {
-                        case 0:
-                            Text(item.isFinished ? "新版本已生效" : "订阅类型：版本更新")
-                        case 1:
-                            Text(item.isFinished ? "应用已上架" : "订阅类型：应用上架")
-                        case 2:
-                            Text(item.isFinished ? "应用已下架" : "订阅类型：应用下架")
-                        default:
-                            Text("")
-                        }
+                            switch item.subscripeType {
+                            case 0:
+                                Text(item.isFinished ? "新版本已生效" : "订阅类型：版本更新")
+                            case 1:
+                                Text(item.isFinished ? "应用已上架" : "订阅类型：应用上架")
+                            case 2:
+                                Text(item.isFinished ? "应用已下架" : "订阅类型：应用下架")
+                            default:
+                                Text("")
+                            }
                         }
                         .font(.subheadline)
                         .foregroundColor(.pink)
