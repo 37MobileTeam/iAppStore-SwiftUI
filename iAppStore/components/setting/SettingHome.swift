@@ -66,7 +66,7 @@ struct SettingItemCell: View {
                     let type = icons[index]
                     VStack{
                         HStack {
-                            Image(type.count > 0 ? type + "_icon" : "iAppStroe_icon")
+                            Image(type.count > 0 ? type + "_icon" : "iAppStore_icon")
                                 .resizable()
                                 .renderingMode(.original)
                                 .frame(width: 65, height: 65)

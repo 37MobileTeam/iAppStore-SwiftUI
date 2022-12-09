@@ -2,7 +2,7 @@
 
 ## 简介
 
-iAppStroe 是一款使用 SwiftUI 打造的苹果商店工具类 App。
+iAppStore 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 
 - 1、提供苹果实时榜单查询，包含 iOS 和 iPad 的热门免费榜、热门付费榜、畅销榜，还有新上架榜、新上架免费榜、新上架付费榜等。
 - 2、提供查询 app 详细页面内容、搜索 app、订阅 app 状态等功能。
@@ -63,4 +63,4 @@ iAppStroe 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 
 ### License
 
-iAppStroe is released under the GPL-3.0 license. [See LICENSE](https://github.com/37iOS/iAppStore-SwiftUI/blob/main/LICENSE) for details.
+iAppStore is released under the GPL-3.0 license. [See LICENSE](https://github.com/37iOS/iAppStore-SwiftUI/blob/main/LICENSE) for details.
