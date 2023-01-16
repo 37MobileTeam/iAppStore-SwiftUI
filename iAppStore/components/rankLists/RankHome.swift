@@ -70,7 +70,7 @@ extension RankHome {
                         regionName: regionName, item: item
                     )
                 ) {
-                    RankCellView(index: index ?? 0, item: item)
+                    RankCellView(index: index ?? 0, regionName: regionName, item: item)
                         .frame(height: 110)
                 }
             }

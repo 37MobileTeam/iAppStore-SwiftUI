@@ -10,8 +10,12 @@ import SwiftUI
 
 struct RankCellView: View {
     
-    var index: Int
-    var item: AppRank
+    let index: Int
+    let regionName: String
+    let item: AppRank
+    
+    @StateObject private var appModel = AppDetailModel()
+    @State @AppStorage("kIsShowAppDataSize") private var isShowAppDataSize = false
     
     var body: some View {
         HStack {
@@ -50,11 +54,16 @@ struct RankCellView: View {
                         
                         Spacer().frame(height: 5)
                         
-                        Text(item.summary?.label.replacingOccurrences(of: "\n", with: "") ?? item.rights?.label ?? "")
-                            .foregroundColor(.secondary)
-                            .font(.footnote)
-                            .lineLimit(2)
-                            .truncationMode(.tail)
+                        if isShowAppDataSize {
+                            Text("占用大小：\(appModel.app?.fileSizeMB ?? "")").font(.footnote).lineLimit(1).foregroundColor(.gray)
+                            Text("最低支持系统：\(appModel.app?.minimumOsVersion ?? "")").font(.footnote).lineLimit(1).foregroundColor(.gray)
+                        } else {
+                            Text(item.summary?.label.replacingOccurrences(of: "\n", with: "") ?? item.rights?.label ?? "")
+                                .foregroundColor(.secondary)
+                                .font(.footnote)
+                                .lineLimit(2)
+                                .truncationMode(.tail)
+                        }
                         
                         Spacer().frame(height: 10)
                         
@@ -72,7 +81,12 @@ struct RankCellView: View {
                 }
             }
         }
-        .contextMenu { AppContextMenu(appleID: item.id.attributes.imID, bundleID: item.id.attributes.imBundleID, appUrl: item.id.label) }
+        .contextMenu { AppContextMenu(appleID: item.id.attributes.imID, bundleID: item.id.attributes.imBundleID, appUrl: item.id.label, developerUrl: item.imArtist.attributes?.href) }
+        .onAppear {
+            if isShowAppDataSize && appModel.app == nil {
+                appModel.searchAppData(item.id.attributes.imID, nil, regionName)
+            }
+        }
     }
 }
 

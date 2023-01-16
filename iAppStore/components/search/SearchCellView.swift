@@ -12,6 +12,7 @@ struct SearchCellView: View {
     
     var index: Int
     var item: AppDetail
+    @State @AppStorage("kIsShowAppDataSize") private var isShowAppDataSize = false
     
     var body: some View {
         HStack {
@@ -50,11 +51,16 @@ struct SearchCellView: View {
                         
                         Spacer().frame(height: 5)
                         
-                        Text(item.description.replacingOccurrences(of: "\n", with: ""))
-                            .foregroundColor(.secondary)
-                            .font(.footnote)
-                            .lineLimit(2)
-                            .truncationMode(.tail)
+                        if isShowAppDataSize {
+                            Text("占用大小：\(item.fileSizeMB)").font(.footnote).lineLimit(1).foregroundColor(.gray)
+                            Text("最低支持系统：\(item.minimumOsVersion)").font(.footnote).lineLimit(1).foregroundColor(.gray)
+                        } else {
+                            Text(item.description.replacingOccurrences(of: "\n", with: ""))
+                                .foregroundColor(.secondary)
+                                .font(.footnote)
+                                .lineLimit(2)
+                                .truncationMode(.tail)
+                        }
                         
                         Spacer().frame(height: 10)
                         
@@ -72,7 +78,7 @@ struct SearchCellView: View {
                 }
             }
         }
-        .contextMenu { AppContextMenu(appleID: String(item.trackId), bundleID: item.bundleId, appUrl: item.trackViewUrl) }
+        .contextMenu { AppContextMenu(appleID: String(item.trackId), bundleID: item.bundleId, appUrl: item.trackViewUrl, developerUrl: item.artistViewUrl) }
     }
 }
 
