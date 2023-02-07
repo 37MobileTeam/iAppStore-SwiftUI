@@ -111,6 +111,20 @@ struct AppDetail: Codable {
         String(format: "%.1f", averageUserRating)
     }
     
+    /// 截图展示大小
+    var screenShotSize: CGSize {
+        let width = 200.0
+        let defaultSize = CGSize(width: width, height: width)
+        let url = screenshotUrls?.first ?? ""
+        let size = url.imageAppleSize()
+        guard size != CGSize.zero else {
+            return defaultSize
+        }
+
+        let height = Double(size.height) / Double(size.width) * width
+        return CGSize(width: width, height: height);
+    }
+    
     static func getNewModel(_ artistId: String) -> AppDetail {
         return AppDetail(advisories: nil, appletvScreenshotUrls: nil, artistId: Int(artistId)!, artistName: "", artistViewUrl: nil, artworkUrl100: nil, artworkUrl512: "", artworkUrl60: "", averageUserRating: 0, averageUserRatingForCurrentVersion: 0, bundleId: "", contentAdvisoryRating: "", currency: "", currentVersionReleaseDate: "", description: "", features: [], fileSizeBytes: nil, formattedPrice: nil, genreIds: [], genres: [], ipadScreenshotUrls: [], isGameCenterEnabled: false, isVppDeviceBasedLicensingEnabled: false, kind: "", languageCodesISO2A: [], minimumOsVersion: "", price: 0, primaryGenreId: 0, primaryGenreName: "", releaseDate: "", releaseNotes: nil, screenshotUrls:nil, sellerName: "", sellerUrl: nil, supportedDevices: [], trackCensoredName: "", trackContentRating: "", trackId: 0, trackName: "", trackViewUrl: "", userRatingCount: 0, userRatingCountForCurrentVersion: 0, version: "", wrapperType: "")
     }
