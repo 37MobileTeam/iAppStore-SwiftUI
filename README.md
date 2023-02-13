@@ -28,13 +28,11 @@ iAppStore 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 
 **iOS**
 
-<img src="screenshot/01.png" width="300" height:auto alt="screenshot/01.png"/>
-<img src="screenshot/02.png" width="300" height:auto alt="screenshot/02.png"/>
-<img src="screenshot/03.png" width="300" height:auto alt="screenshot/03.png"/>
-<img src="screenshot/04.png" width="300" height:auto alt="screenshot/04.png"/>
-<img src="screenshot/05.png" width="300" height:auto alt="screenshot/05.png"/>
-<img src="screenshot/06.png" width="300" height:auto alt="screenshot/06.png"/>
-<img src="screenshot/07.png" width="300" height:auto alt="screenshot/07.png"/>
+| ![](screenshot/01.png) | ![](screenshot/02.png) |
+| ----- | ----- |
+| ![](screenshot/03.png) | ![](screenshot/04.png) |
+| ![](screenshot/05.png) | ![](screenshot/06.png) |
+| ![](screenshot/07.png) |  |
 
 **macOS**
 
@@ -59,7 +57,7 @@ iAppStore 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 
 * [@iHTCboy](https://github.com/iHTCboy) 
 * [@chenxi92](https://github.com/chenxi92)
-
+* [@hyalpha](https://github.com/hyalpha)
 
 ### License
 
