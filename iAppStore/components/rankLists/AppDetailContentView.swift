@@ -344,32 +344,11 @@ struct AppDetailBigImageShowView: View {
 struct AppDetailContentSectionView: View {
     
     @StateObject var appModel: AppDetailModel
-    @State private var isShowAllContent: Bool = false
-    @State private var isShowUpdateContent: Bool = false
     
     var body: some View {
         
         // Content Section
-        ZStack(alignment: .bottomTrailing) {
-            
-            HStack{
-                Text(isShowAllContent ? appModel.app?.description ?? "" : appModel.app?.description.replacingOccurrences(of: "\n", with: "") ?? "")
-                    .font(.subheadline)
-                    .lineLimit(isShowAllContent ? .max : 3)
-                Spacer()
-            }
-            
-            if isShowAllContent == false {
-                Button("更多") {
-                    isShowAllContent = true
-                }
-                .font(.subheadline)
-                .foregroundColor(Color.blue)
-                .background(Color.tsmg_systemBackground)
-                .offset(x: 5, y: 0)
-                .shadow(color: .tsmg_systemBackground.opacity(0.9), radius: 3, x: -12)
-            }
-        }
+        MoreParagraphView(text: appModel.app?.description)
         .padding([.leading, .trailing], 10)
         .padding(.bottom, 12)
         
@@ -403,29 +382,52 @@ struct AppDetailContentSectionView: View {
             Text(appModel.app?.currentVersionReleaseTime ?? "").foregroundColor(.gray).font(.subheadline).padding(.trailing, 12)
         }.padding(.top, 10)
         
+        MoreParagraphView(text: appModel.app?.releaseNotes)
+        .padding([.leading, .trailing], 12)
+        .padding(.bottom, 10)
+        
+        Divider().padding(.bottom, 15).padding([.leading, .trailing], 10)
+    }
+}
+
+struct MoreParagraphView: View {
+    
+    let text: String?
+    @State private var showMoreText = false
+    
+    var body: some View {
         ZStack(alignment: .bottomTrailing) {
             HStack {
-                Text(isShowUpdateContent ? appModel.app?.releaseNotes ?? "" : appModel.app?.releaseNotes?.replacingOccurrences(of: "\n", with: "") ?? "")
+                Text(paragraphText)
                     .font(.subheadline)
-                    .lineLimit(isShowUpdateContent ? .max : 3)
+                    .lineLimit(showMoreText ? .max : 3)
                 Spacer()
             }
-            
-            if isShowUpdateContent == false {
+            if !showMoreText {
                 Button("更多") {
-                    isShowUpdateContent = true
+                    withAnimation {
+                        showMoreText = true
+                    }
                 }
                 .font(.subheadline)
                 .foregroundColor(Color.blue)
                 .background(Color.tsmg_systemBackground)
                 .offset(x: 5, y: 0)
-                .shadow(color: .tsmg_systemBackground.opacity(0.9), radius: 3, x: -12)
+                .shadow(
+                    color: .tsmg_systemBackground.opacity(0.9),
+                    radius: 3, x: -12
+                )
             }
         }
-        .padding([.leading, .trailing], 12)
-        .padding(.bottom, 10)
-        
-        Divider().padding(.bottom, 15).padding([.leading, .trailing], 10)
+    }
+    
+    private var paragraphText: String {
+        if let text = text {
+            return text
+//                .replacingOccurrences(of: "\n", with: "")
+        } else {
+           return ""
+        }
     }
 }
 
