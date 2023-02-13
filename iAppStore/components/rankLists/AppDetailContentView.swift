@@ -184,7 +184,7 @@ struct AppDetailScreenShowView: View {
             
             if appModel.app != nil && appModel.app!.isSupportiPhone {
                 
-                AppDetailScreenShotView(screenshotUrls: appModel.app?.screenshotUrls, imageWidth: 200)
+                AppDetailScreenShotView(screenshotUrls: appModel.app?.screenshotUrls, imageSize: appModel.app?.screenShotSize)
                 
                 HStack {
                     Image(systemName: "iphone").foregroundColor(.gray).font(.body)
@@ -213,7 +213,7 @@ struct AppDetailScreenShowView: View {
             if (appModel.app != nil && extendiPadShot)
                 || (appModel.app != nil && !appModel.app!.isSupportiPhone && appModel.app!.isSupportiPad)
             {
-                AppDetailScreenShotView(screenshotUrls: appModel.app?.ipadScreenshotUrls, imageWidth: 300)
+                AppDetailScreenShotView(screenshotUrls: appModel.app?.ipadScreenshotUrls, imageSize: appModel.app?.screenShotSize)
                 
                 HStack {
                     Image(systemName: "ipad").foregroundColor(.gray).font(.body)
@@ -234,7 +234,7 @@ struct AppDetailScreenShowView: View {
 struct AppDetailScreenShotView: View {
     
     var screenshotUrls: [String]?
-    var imageWidth: CGFloat = 200
+    var imageSize: CGSize?
     @State private var selectedShot: Bool = false
     @State private var selectedImgUrl: String?
     
@@ -255,14 +255,17 @@ struct AppDetailScreenShotView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .cornerRadius(11)
-                                    .frame(width: imageWidth)
+                                    .frame(width: imageSize?.width)
                             },
                             image: {
                                 $0.resizable()
                                     .scaledToFit()
                                     .cornerRadius(11)
-                                    .overlay(RoundedRectangle(cornerRadius: 11).stroke(Color.gray, lineWidth: 0.1))
-                                    .frame(width: imageWidth)
+                                    .overlay(RoundedRectangle(cornerRadius: 11)
+                                        .stroke(Color.gray, lineWidth: 0.1)
+                                        .frame(width: imageSize?.width, height: imageSize?.height))
+                                    .frame(width: imageSize?.width, height: imageSize?.height)
+
                             }
                         )
                     }
