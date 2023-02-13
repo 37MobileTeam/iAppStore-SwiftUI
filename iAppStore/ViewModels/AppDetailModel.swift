@@ -14,6 +14,8 @@ class AppDetailModel: ObservableObject {
     @Published var app: AppDetail? = nil
     @Published var results: [AppDetail] = []
     
+    @Published var isLoading: Bool = false
+    
     func searchAppData(_ appId: String?, _ keyWord: String?, _ regionName: String) {
         
         let regionId = TSMGConstants.regionTypeListIds[regionName] ?? "cn"
@@ -25,7 +27,9 @@ class AppDetailModel: ObservableObject {
             endpoint = APIService.Endpoint.searchApp(word: encodeword, country: regionId, limit: 200)
         }
         
+        isLoading = true
         APIService.shared.POST(endpoint: endpoint, params: nil) { (result: Result<AppDetailM, APIService.APIError>) in
+            self.isLoading = false
             switch result {
             case let .success(response):
                 self.results = response.results

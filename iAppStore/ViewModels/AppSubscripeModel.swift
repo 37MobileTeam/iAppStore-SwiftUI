@@ -10,18 +10,23 @@ import Foundation
 
 
 class AppSubscripeModel: ObservableObject {
-    
-    public static let shared = AppSubscripeModel()
-    
-    @Published var subscripes: [AppSubscripe] = []
-    @Published var apps: [String: AppDetail] = [:]
+        
+    @Published private(set) var subscripes: [AppSubscripe] {
+        didSet {
+            saveSubscripes()
+        }
+    }
     
     private var timer: Timer?
     private let interval: TimeInterval = 30
+    private let modelName = "AppSubscripeModel"
+    private let folderName = "AppSubscripe"
     
     init() {
-        timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
         // 加载历史记录
+        subscripes = LocalFileManager.instance.getModel(modelName: modelName, folderName: folderName)
+        
+        timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
     }
     
     deinit {
@@ -29,6 +34,35 @@ class AppSubscripeModel: ObservableObject {
         timer = nil
     }
     
+    // MARK: Public
+    
+    func removeAt(indexSet: IndexSet) {
+        subscripes.remove(atOffsets: indexSet)
+    }
+    
+    func addSubscripe(appId: String, regionName: String, subscripeType: Int, appDetail: AppDetail?) {
+        let subscripe = AppSubscripe(
+            appId: appId,
+            regionName: regionName,
+            subscripeType: subscripeType,
+            currentVersion: appDetail?.version ?? "",
+            newVersion: nil,
+            startTimeStamp: Date().timeIntervalSince1970,
+            endCheckTimeStamp: nil,
+            isFinished: false,
+            iconURL: appDetail?.artworkUrl100,
+            trackName: appDetail?.trackName ?? ""
+        )
+        
+        subscripes.append(subscripe)
+    }
+    
+    func subscripeExist(appId: String) -> Bool {
+        let subscripe = subscripes.first(where: { $0.appId == appId })
+        return subscripe != nil
+    }
+    
+    // MARK: Private
     
     @objc private func handleTimer(_ timer: Timer?) {
         subscripes.enumerated().forEach { (index, app) in
@@ -38,7 +72,7 @@ class AppSubscripeModel: ObservableObject {
         }
     }
     
-    func checkStatus(_ app: AppSubscripe, index: Int) {
+    private func checkStatus(_ app: AppSubscripe, index: Int) {
         
         let regionId = TSMGConstants.regionTypeListIds[app.regionName] ?? "cn"
         let endpoint: APIService.Endpoint = APIService.Endpoint.lookupApp(appid: app.appId, country: regionId)
@@ -54,7 +88,6 @@ class AppSubscripeModel: ObservableObject {
                             if app.currentVersion != model.version {
                                 let new = AppSubscripe.updateModel(app: app, checkTime: Date().timeIntervalSince1970, isFinished: true, model.version)
                                 self.subscripes[index] = new
-                                self.apps[app.appId] = model
                                 return
                             }
                         }
@@ -68,7 +101,6 @@ class AppSubscripeModel: ObservableObject {
                             let model = response.results.first!
                             let new = AppSubscripe.updateModel(app: app, checkTime: Date().timeIntervalSince1970, isFinished: true, model.version)
                             self.subscripes[index] = new
-                            self.apps[app.appId] = model
                         } else {
                             let new = AppSubscripe.updateModel(app: app, checkTime: Date().timeIntervalSince1970, isFinished: false, nil)
                             self.subscripes[index] = new
@@ -93,4 +125,9 @@ class AppSubscripeModel: ObservableObject {
             }
         }
     }
+    
+    private func saveSubscripes() {
+        LocalFileManager.instance.saveModel(model: subscripes, modelName: modelName, folderName: folderName)
+    }
+    
 }

@@ -67,3 +67,44 @@ class LocalFileManager {
         return folderURL.appendingPathComponent(imageName + ".png")
     }
 }
+
+extension LocalFileManager {
+    func saveModel<T: Encodable>(model: [T], modelName: String, folderName: String ) {
+        
+        createFolderIfNeeded(folderName: folderName)
+        
+        guard let url = getURLForModel(modelName: modelName, folderName: folderName) else {
+            return
+        }
+        
+        do {
+            let data = try JSONEncoder().encode(model)
+            try data.write(to: url)
+        } catch let error {
+            print("Error save model. ModelName: \(modelName) \(error)")
+        }
+    }
+    
+    func getModel<T: Decodable>(modelName: String, folderName: String) -> [T] {
+        guard let url = getURLForModel(modelName: modelName, folderName: folderName),
+                FileManager.default.fileExists(atPath: url.path)
+                else {
+            return []
+        }
+       
+        do {
+            let data = try Data(contentsOf: url)
+            return try JSONDecoder().decode([T].self, from: data)
+        } catch {
+            print("Error get model, error: \(error)")
+            return []
+        }
+    }
+    
+    private func getURLForModel(modelName: String, folderName: String) -> URL? {
+        guard let folderURL = getURLForFolder(folderName: folderName), !modelName.isEmpty else {
+            return nil
+        }
+        return folderURL.appendingPathComponent(modelName + ".model")
+    }
+}
