@@ -16,7 +16,12 @@ struct AboutAppView: View {
     var body: some View {
         ScrollView {
             Spacer().frame(height: 50)
-            Image("iAppStore_icon").cornerRadius(15).padding(.bottom, 10)
+            Image("iAppStore_icon")
+                .resizable()
+                .frame(maxWidth: 90)
+                .frame(maxHeight: 90)
+                .cornerRadius(15)
+                .padding(.bottom, 10)
             Text("iAppStore").fontWeight(.bold).padding(.bottom, 5)
             Text("v \(appVersion ?? "") (\(appSubVersion ?? ""))").font(.footnote).foregroundColor(.gray).padding(.bottom, 10)
             Text("iAppStore 是一款使用 SwiftUI 打造的苹果商店工具类 App。").padding([.leading, .trailing], 20).padding(.bottom, 10)

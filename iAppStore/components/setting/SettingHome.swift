@@ -64,7 +64,7 @@ struct SettingItemCell: View {
     var title: String
     var index: Int
     @State private var iconViewIsExpanded: Bool = false
-    @State private var icons: [String] = ["", "37", "37iOS", "37AppStore", "Apple", "AppleRainbow"]
+    @State private var icons: [String] = ["iAppStore", "37", "37iOS", "37AppStore", "Apple", "AppleRainbow"]
     
     var body: some View {
     
@@ -74,15 +74,13 @@ struct SettingItemCell: View {
                     let type = icons[index]
                     VStack{
                         HStack {
-                            Image(type.count > 0 ? type + "_icon" : "iAppStroe_icon")
+                            Image(type + "_icon")
                                 .resizable()
-                                .renderingMode(.original)
                                 .frame(width: 65, height: 65)
                                 .cornerRadius(15)
-                                .padding(.bottom, 10)
                                 .padding(.leading, 5)
                             
-                            Text((type.count > 0 ? type : "默认") + "图标").padding(.leading, 15)
+                            Text((index == 0 ? "默认" : type) + "图标").padding(.leading, 15)
                             
                             Spacer()
                             
@@ -91,7 +89,7 @@ struct SettingItemCell: View {
                     }
                     .onTapGesture {
                         
-                        UIApplication.shared.setAlternateIconName(type.count > 0 ? type : nil)
+                        UIApplication.shared.setAlternateIconName(index == 0 ? nil : type)
                         
                         withAnimation{
                             iconViewIsExpanded = false
