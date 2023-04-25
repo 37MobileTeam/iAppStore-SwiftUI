@@ -66,7 +66,7 @@ struct TabbarView: View {
                 self.tabbarItem(text: "订阅", image: "checkmark.seal.fill")
             }.tag(Tab.subscription)
             SettingHome().tabItem{
-                self.tabbarItem(text: "设置", image: "heart.circle")
+                self.tabbarItem(text: "设置", image: "gearshape")
             }.tag(Tab.setting)
         }
     }

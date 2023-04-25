@@ -33,7 +33,8 @@ public struct APIService {
              newFreeApplications(cid: String, country: String, limit: Int),
              newPaidApplications(cid: String, country: String, limit: Int),
              searchApp(word: String, country: String, limit: Int),
-             lookupApp(appid: String, country: String)
+             lookupApp(appid: String, country: String),
+             lookupBundleId(appid: String, country: String)
 
         func url() -> String {
             let url = APIService.shared.baseURL
@@ -61,6 +62,8 @@ public struct APIService {
                 return url + "search?term=\(word)&country=\(country)&limit=\(limit)&entity=software"
             case .lookupApp(appid: let appid, country: let country):
                 return url + "\(country)/lookup?id=\(appid)"
+            case .lookupBundleId(appid: let appid, country: let country):
+                return url + "\(country)/lookup?bundleId=\(appid)"
             }
         }
     }
@@ -83,7 +86,6 @@ public struct APIService {
         debugPrint(components.url!)
         var request = URLRequest(url: components.url!, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60.0)
         request.httpMethod = "POST"
-        request.setValue("iAppStore/1.0 Mobile/15E148 Safari/604.1", forHTTPHeaderField: "User-Agent")
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {

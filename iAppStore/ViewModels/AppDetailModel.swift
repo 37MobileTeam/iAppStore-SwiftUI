@@ -36,6 +36,28 @@ class AppDetailModel: ObservableObject {
                 if appId != nil {
                     self.app = response.results.first
                 }
+                if let word = keyWord {
+                    self.lookupBundleId(word: word, regionId: regionId)
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    /// search bundleId
+    func lookupBundleId(word: String, regionId: String) {
+        guard let bundleId = word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return
+        }
+        
+        let endpoint = APIService.Endpoint.lookupBundleId(appid: bundleId, country: regionId)
+        APIService.shared.POST(endpoint: endpoint, params: nil) { (result: Result<AppDetailM, APIService.APIError>) in
+            switch result {
+            case let .success(response):
+                if let app = response.results.first {
+                    self.results.insert(app, at: 0)
+                }
             case .failure(_):
                 break
             }

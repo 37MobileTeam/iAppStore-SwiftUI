@@ -41,7 +41,7 @@ struct LoadingView: View {
     
     var animateText: some View {
         HStack(spacing: 1) {
-            ForEach(loadingText.indices) { index in
+            ForEach(loadingText.indices, id: \.self) { index in
                 Text(loadingText[index])
                     .font(.headline)
                     .fontWeight(.heavy)

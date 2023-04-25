@@ -241,7 +241,7 @@ struct AppDetailScreenShotView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack() {
-                ForEach(0..<(screenshotUrls ?? [String]()).count) { index in
+                ForEach(0..<(screenshotUrls ?? [String]()).count, id: \.self) { index in
                     let url = screenshotUrls![index]
                     Button(action: {
                         selectedImgUrl = url.imageAppleScale()

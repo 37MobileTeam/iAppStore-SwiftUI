@@ -70,7 +70,7 @@ extension RankSortView {
     
     var rankContent: some View {
         ScrollView {
-            ForEach(0..<TSMGConstants.rankingTypeLists.count) { index in
+            ForEach(0..<TSMGConstants.rankingTypeLists.count, id: \.self) { index in
                 buildSortListRow(index: index)
             }
         }
@@ -78,7 +78,7 @@ extension RankSortView {
     
     var categoryContent: some View {
         ScrollView {
-            ForEach(0..<TSMGConstants.categoryTypeLists.count) {index in
+            ForEach(0..<TSMGConstants.categoryTypeLists.count, id: \.self) {index in
                 buildSortListRow(index: index)
             }
         }
@@ -86,7 +86,7 @@ extension RankSortView {
     
     var regionContent: some View {
         ScrollView {
-            ForEach(0..<TSMGConstants.regionTypeLists.count) {index in
+            ForEach(0..<TSMGConstants.regionTypeLists.count, id: \.self) {index in
                 buildSortListRow(index: index)
             }
         }
