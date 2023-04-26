@@ -87,6 +87,7 @@ struct SettingItemCell: View {
                             Image(systemName: "chevron.right").imageScale(.small).foregroundColor(Color.tsmg_placeholderText).padding(.trailing, 10)
                         }
                     }
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         
                         UIApplication.shared.setAlternateIconName(index == 0 ? nil : type)
