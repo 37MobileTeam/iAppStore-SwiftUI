@@ -17,7 +17,7 @@ struct LinkString: Identifiable {
 
 struct SettingHome: View {
     
-    private let items = ["切换图标", "AppStore", "蝉大师", "点点数据", "七麦数据"]
+    private let items = ["切换图标", "AppStore", "蝉应用", "点点数据", "七麦数据"]
     private let apples = ["Apple 中国大陆官网", "Apple Newsroom", "App Store Connect", "Apple Developer", "Apple News and Updates", "Apple 新闻及更新", "App Store Review Guidelines", "App Store 审核指南", "Apple Services Status - US", "Apple Services Status - CN", "Apple System Status", "Apple 安全性更新", "iOS & iPadOS Release Notes", "Xcode Release", "iOS & iPadOS 普及率", "Software Downloads", "App Store Connect 帮助", "iOS 16 更新", "iPadOS 16 更新", "macOS 13 更新", "识别你的 iPhone 机型", "识别你的 iPad 机型", "识别 iPod 机型", "识别 MacBook 机型", "识别 MacBook Air 机型", "识别 MacBook Pro 机型", "识别 Mac mini 机型", "识别 Mac Studio 机型", "识别 Mac Pro 机型", "识别你的 iMac 机型", "识别你的 Apple Watch", "识别你的 AirPods", "识别你的 HomePod", "识别你的 Apple TV"]
     
     @State private var linkPage: LinkString? = nil
@@ -110,7 +110,7 @@ struct SettingItemCell: View {
                         let url = URL(string: "itms-apps://itunes.apple.com")
                         UIApplication.shared.open(url!)
                     case 2:
-                        linkPage = LinkString(url: "https://www.chandashi.com")
+                        linkPage = LinkString(url: "https://app.chandashi.com")
                     case 3:
                         linkPage = LinkString(url: "https://app.diandian.com")
                     case 4:
