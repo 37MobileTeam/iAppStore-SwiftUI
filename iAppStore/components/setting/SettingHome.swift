@@ -64,7 +64,7 @@ struct SettingItemCell: View {
     var title: String
     var index: Int
     @State private var iconViewIsExpanded: Bool = false
-    @State private var icons: [String] = ["iAppStore", "AppStore", "AppStoreWhite", "37", "37iOS", "37AppStore", "Apple", "AppleRainbow"]
+    @State private var icons: [String] = ["iAppStore", "AppStore", "AppStoreNew", "AppStoreWhite", "37", "37iOS", "37AppStore", "Apple", "AppleRainbow"]
     
     var body: some View {
     
