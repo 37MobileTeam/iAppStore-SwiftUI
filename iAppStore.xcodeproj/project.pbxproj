@@ -11,6 +11,8 @@
 		6C51177527A2755100D5E21D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51177327A2755000D5E21D /* NetworkManager.swift */; };
 		6C51177627A2755100D5E21D /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C51177427A2755100D5E21D /* NetworkMonitor.swift */; };
 		6C9A423E27A637E60074FD09 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A423D27A637E60074FD09 /* LoadingView.swift */; };
+		6D0809DC29FB576100D12E21 /* AppleServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0809DB29FB576100D12E21 /* AppleServicesView.swift */; };
+		6D0809DE29FB5FA500D12E21 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0809DD29FB5FA500D12E21 /* SafariView.swift */; };
 		6D26AAC2278420CB003F82BF /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D26AAC1278420CB003F82BF /* AboutAppView.swift */; };
 		6D490E542782F35F00B5DD80 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D490E532782F35F00B5DD80 /* Strings.swift */; };
 		6D490E56278328E400B5DD80 /* SubscriptionAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D490E55278328E400B5DD80 /* SubscriptionAddView.swift */; };
@@ -67,6 +69,8 @@
 		6C51177327A2755000D5E21D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6C51177427A2755100D5E21D /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		6C9A423D27A637E60074FD09 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		6D0809DB29FB576100D12E21 /* AppleServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleServicesView.swift; sourceTree = "<group>"; };
+		6D0809DD29FB5FA500D12E21 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		6D26AAC1278420CB003F82BF /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		6D490E532782F35F00B5DD80 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		6D490E55278328E400B5DD80 /* SubscriptionAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAddView.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 			children = (
 				6D738E2D2779736B00A4A76E /* SettingHome.swift */,
 				6D26AAC1278420CB003F82BF /* AboutAppView.swift */,
+				6D0809DB29FB576100D12E21 /* AppleServicesView.swift */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 			children = (
 				6DB3B796277EEC7100E8626F /* ImageLoader.swift */,
 				6C9A423D27A637E60074FD09 /* LoadingView.swift */,
+				6D0809DD29FB5FA500D12E21 /* SafariView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -463,6 +469,7 @@
 				6C51177627A2755100D5E21D /* NetworkMonitor.swift in Sources */,
 				6D738E2E2779736B00A4A76E /* SettingHome.swift in Sources */,
 				6D738E2A2779734700A4A76E /* SearchHome.swift in Sources */,
+				6D0809DC29FB576100D12E21 /* AppleServicesView.swift in Sources */,
 				6DB3B791277D757400E8626F /* AppRank.swift in Sources */,
 				6D738E282779733400A4A76E /* RankHome.swift in Sources */,
 				6DB3B70027799F6200E8626F /* AppDetailView.swift in Sources */,
@@ -480,6 +487,7 @@
 				6D605A15278B15850001C69F /* AppContextMenu.swift in Sources */,
 				6DB3B782277D6CE700E8626F /* Constants.swift in Sources */,
 				6D490E56278328E400B5DD80 /* SubscriptionAddView.swift in Sources */,
+				6D0809DE29FB5FA500D12E21 /* SafariView.swift in Sources */,
 				6D95DC6E27804AAD00EE8B54 /* AppDetail.swift in Sources */,
 				6D490E542782F35F00B5DD80 /* Strings.swift in Sources */,
 				6D26AAC2278420CB003F82BF /* AboutAppView.swift in Sources */,
@@ -645,7 +653,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2023.04.27;
+				CURRENT_PROJECT_VERSION = 2023.04.29;
 				DEVELOPMENT_ASSET_PATHS = "\"iAppStore/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -664,7 +672,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.37iOS.iApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -685,7 +693,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2023.04.27;
+				CURRENT_PROJECT_VERSION = 2023.04.29;
 				DEVELOPMENT_ASSET_PATHS = "\"iAppStore/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -704,7 +712,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.37iOS.iApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

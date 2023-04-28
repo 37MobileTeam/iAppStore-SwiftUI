@@ -1,6 +1,6 @@
 # iAppStore
 
-## 简介
+## 1. 项目介绍
 
 iAppStore 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 
@@ -9,22 +9,44 @@ iAppStore 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 - 3、支持苹果所有国家和地区的商店，无需切换 Apple Id，即可查看！
 
 
-> 本项目的背景，可以通过链接了解：[用 SwiftUI 实现一个开源的 App Store - 掘金](https://juejin.cn/post/7051512478630412301)
+> 本项目的发起原由：[用 SwiftUI 实现一个开源的 App Store - 掘金](https://juejin.cn/post/7051512478630412301)
 
-## 编译
+## 2. 安装说明
 
-- 支持 iOS 14 以上
-- 支持 macOS 11 以上
+### 2.1 iOS / iPadOS / Mac Apple Silicon
+
+- iOS 14.0+
+- iPadOS 14.0+
+- macOS 11.0+（Mac Apple Silicon M1/M2+）
 
 
-**运行方法：**
-打开项目即可编译，无需安装其它依赖库。
+TestFlight 下载地址：[https://testflight.apple.com/join/XXEQdVKN](https://testflight.apple.com/join/XXEQdVKN)
+
+> 注：
+> 1. TestFlight 名额有限，先下先得！
+> 2. 如无名额，iOS 和 iPadOS 需要自行编译安装。
+
+
+### 2.2 macSO 安装包下载
+
+- macOS 11.0+
+- Mac Apple Silicon M1/M2+
+- Mac Intel x86_64
+
+- Mac 下载：[Releases](https://github.com/37iOS/iAppStore-SwiftUI/releases)
+
+
+### 2.3 Xcode 构建
+
+- 构建依赖：Xcode14+
+
+下载项目后，双击 `iAppStore.xcodeproj` 打开项目即可编译，无需安装其它依赖库。
 
 > 为了尽量更多的朋友入门 SwiftUI 学习，本项目未使用第三方框架，所以有一些功能实现简单，仅供参考。
 > 另外，部分注释代码没有删除，是一些可能有价值的参考代码。
 
 
-## 效果示例
+## 3. 效果示例
 
 **iOS**
 
@@ -39,7 +61,7 @@ iAppStore 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 <img src="screenshot/08.png" width="800" height:auto alt="screenshot/08.png"/>
 <img src="screenshot/09.png" width="800" height:auto alt="screenshot/09.png"/>
 
-### TODO
+## 4. TODO
 
 1. [x] 请求失败导致页面空白的处理（2022-02-02）
 2. [] 数据请求可以按分页请求加载
@@ -49,7 +71,7 @@ iAppStore 是一款使用 SwiftUI 打造的苹果商店工具类 App。
 6. [x] 应用订阅状态持久化（2023-02-13）
 7. [] 多语言的支持（英文）
 
-### FAQ
+## 5. FAQ
 
 * [New Issue](https://github.com/37iOS/iAppStore-SwiftUI/issues)
 

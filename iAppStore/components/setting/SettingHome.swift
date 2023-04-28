@@ -7,8 +7,7 @@
 //
 
 import SwiftUI
-import SafariServices
-
+import StoreKit
 
 struct LinkString: Identifiable {
     let url: String
@@ -17,10 +16,8 @@ struct LinkString: Identifiable {
 
 struct SettingHome: View {
     
-    private let items = ["切换图标", "AppStore", "蝉应用", "点点数据", "七麦数据"]
-    private let apples = ["Apple 中国大陆官网", "Apple Newsroom", "App Store Connect", "Apple Developer", "Apple News and Updates", "Apple 新闻及更新", "App Store Review Guidelines", "App Store 审核指南", "Apple Services Status - US", "Apple Services Status - CN", "Apple System Status", "Apple 安全性更新", "iOS & iPadOS Release Notes", "Xcode Release", "iOS & iPadOS 普及率", "Software Downloads", "App Store Connect 帮助", "iOS 16 更新", "iPadOS 16 更新", "macOS 13 更新", "识别你的 iPhone 机型", "识别你的 iPad 机型", "识别 iPod 机型", "识别 MacBook 机型", "识别 MacBook Air 机型", "识别 MacBook Pro 机型", "识别 Mac mini 机型", "识别 Mac Studio 机型", "识别 Mac Pro 机型", "识别你的 iMac 机型", "识别你的 Apple Watch", "识别你的 AirPods", "识别你的 HomePod", "识别你的 Apple TV"]
-    
     @State private var linkPage: LinkString? = nil
+    private let items = ["切换图标", "AppStore", "蝉应用", "点点数据", "七麦数据"]
     
     var body: some View {
         NavigationView {
@@ -32,19 +29,23 @@ struct SettingHome: View {
                         }
                     }
                     
+                    Section(header: Text("苹果服务")) {
+                        NavigationLink(destination: AppleServicesView()) {
+                            HStack {
+                                Text("苹果常用网站")
+                                Spacer()
+                            }
+                            .padding([.top, .bottom], 10)
+                        }
+                        AppleSubscriptionManagerView(linkPage: $linkPage)
+                    }
+                    
                     Section(header: Text("关于")) {
                         NavigationLink(destination: AboutAppView()) {
                             Text("关于应用").frame(height: 50)
                         }
                         SettingItemCell(linkPage: $linkPage, title: "GitHub 开源", index: items.count)
                         SettingItemCell(linkPage: $linkPage, title: "37手游iOS技术运营团队", index: items.count + 1)
-                    }
-                    
-                    Section(header: Text("苹果服务")) {
-                        ForEach(apples, id: \.self) { title in
-                            let index = items.count + 2 + apples.firstIndex(of: title)!
-                            SettingItemCell(linkPage: $linkPage, title: title, index: index)
-                        }
                     }
                 }
             }
@@ -57,6 +58,36 @@ struct SettingHome: View {
     }
 }
 
+struct AppleSubscriptionManagerView: View {
+    
+    @Binding var linkPage: LinkString?
+    private let subscriptionsURL = "https://apps.apple.com/account/subscriptions"
+    
+    var body: some View {
+        HStack {
+            Button(action: {
+                Task {
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                        do {
+                            if #available(iOS 15.0, *) {
+                                try await AppStore.showManageSubscriptions(in: windowScene)
+                            } else {
+                                linkPage = LinkString(url: subscriptionsURL)
+                            }
+                        } catch {
+                            linkPage = LinkString(url: subscriptionsURL)
+                        }
+                    }
+                }
+            }) {
+                Text("苹果订阅管理").foregroundColor(Color.primary)
+            }
+            Spacer()
+            Image(systemName: "chevron.right").imageScale(.small).foregroundColor(Color.secondary)
+        }
+        .padding([.top, .bottom], 10)
+    }
+}
 
 struct SettingItemCell: View {
     
@@ -120,74 +151,6 @@ struct SettingItemCell: View {
                         linkPage = LinkString(url: "https://github.com/37iOS/iAppStore-SwiftUI")
                     case 6:
                         linkPage = LinkString(url: "https://juejin.cn/user/1002387318511214")
-                    case 7:
-                        linkPage = LinkString(url: "https://www.apple.com.cn")
-                    case 8:
-                        linkPage = LinkString(url: "https://www.apple.com.cn/newsroom/")
-                    case 9:
-                        linkPage = LinkString(url: "https://appstoreconnect.apple.com")
-                    case 10:
-                        linkPage = LinkString(url: "https://developer.apple.com")
-                    case 11:
-                        linkPage = LinkString(url: "https://developer.apple.com/news/")
-                    case 12:
-                        linkPage = LinkString(url: "https://developer.apple.com/cn/news/")
-                    case 13:
-                        linkPage = LinkString(url: "https://developer.apple.com/app-store/review/guidelines/")
-                    case 14:
-                        linkPage = LinkString(url: "https://developer.apple.com/cn/app-store/review/guidelines/")
-                    case 15:
-                        linkPage = LinkString(url: "https://www.apple.com/support/systemstatus/")
-                    case 16:
-                        linkPage = LinkString(url: "https://www.apple.com/cn/support/systemstatus/")
-                    case 17:
-                        linkPage = LinkString(url: "https://developer.apple.com/system-status/")
-                    case 18:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT201222")
-                    case 19:
-                        linkPage = LinkString(url: "https://developer.apple.com/documentation/ios-ipados-release-notes")
-                    case 20:
-                        linkPage = LinkString(url: "https://developer.apple.com/cn/support/xcode/")
-                    case 21:
-                        linkPage = LinkString(url: "https://developer.apple.com/cn/support/app-store/")
-                    case 22:
-                        linkPage = LinkString(url: "https://developer.apple.com/download/")
-                    case 23:
-                        linkPage = LinkString(url: "https://developer.apple.com/cn/help/app-store-connect/")
-                    case 24:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT213407")
-                    case 25:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT213408")
-                    case 26:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT213268")
-                    case 27:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT201296")
-                    case 28:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT201471")
-                    case 29:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT204217")
-                    case 30:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT201608")
-                    case 31:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT201862")
-                    case 32:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT201300")
-                    case 33:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT201894")
-                    case 34:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT213073")
-                    case 35:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT202888")
-                    case 36:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT201634")
-                    case 37:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT204507")
-                    case 38:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT209580")
-                    case 39:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT211109")
-                    case 40:
-                        linkPage = LinkString(url: "https://support.apple.com/zh-cn/HT200008")
                     default: break
                     }
                 }) {
@@ -202,25 +165,6 @@ struct SettingItemCell: View {
         }
     }
 }
-
-
-
-// MARK: -  SafariView
-struct SafariView: UIViewControllerRepresentable {
-
-    let url: URL
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
-        let sf = SFSafariViewController(url: url)
-        sf.dismissButtonStyle = .close
-        return sf
-    }
-
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
-
-    }
-}
-
 
 struct SettingHome_Previews: PreviewProvider {
     static var previews: some View {

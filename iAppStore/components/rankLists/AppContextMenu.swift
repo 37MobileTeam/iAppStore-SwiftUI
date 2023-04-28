@@ -14,6 +14,7 @@ struct AppContextMenu: View {
     let bundleID: String?
     let appUrl: String?
     let developerUrl: String?
+    var showAppDataSize: Bool = true
     
     @AppStorage("kIsShowAppDataSize") private var isShowAppDataSize = false
     
@@ -55,8 +56,10 @@ struct AppContextMenu: View {
                 }
             }
             
-            CreateMenuItem(text: "\(isShowAppDataSize ? "隐藏" : "显示") App 大小和最低支持系统", imgName: "arrow.down.app") {
-                isShowAppDataSize.toggle()
+            if showAppDataSize {
+                CreateMenuItem(text: "\(isShowAppDataSize ? "隐藏" : "显示") App 大小和最低支持系统", imgName: "arrow.down.app") {
+                    isShowAppDataSize.toggle()
+                }
             }
         }
     }
@@ -81,6 +84,6 @@ struct AppContextMenu: View {
 
 struct AppContextMenu_Previews: PreviewProvider {
     static var previews: some View {
-        AppContextMenu(appleID: "123456", bundleID: "iAppStore", appUrl: "https://juejin.cn/user/1002387318511214", developerUrl: "https://juejin.cn/user/1002387318511214")
+        AppContextMenu(appleID: "123456", bundleID: "iAppStore", appUrl: "https://juejin.cn/user/1002387318511214", developerUrl: "https://juejin.cn/user/1002387318511214", showAppDataSize: true)
     }
 }

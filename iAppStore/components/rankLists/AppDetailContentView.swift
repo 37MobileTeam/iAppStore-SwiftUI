@@ -34,6 +34,9 @@ struct AppDetailContentView: View {
             ScrollView {
                 // Header Section
                 AppDetailHeaderView(appModel: appModel, alertType: $alertType)
+                    .contextMenu {
+                        AppContextMenu(appleID: String(appModel.app?.trackId ?? 0), bundleID: appModel.app?.bundleId, appUrl: appModel.app?.trackViewUrl, developerUrl: appModel.app?.artistViewUrl, showAppDataSize: false)
+                    }
                 
                 // ScreenShot View
                 AppDetailScreenShowView(appModel: appModel)

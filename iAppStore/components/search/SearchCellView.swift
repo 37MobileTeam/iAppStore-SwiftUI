@@ -23,13 +23,13 @@ struct SearchCellView: View {
                     Image("icon_placeholder")
                         .resizable()
                         .renderingMode(.original)
-                        .cornerRadius(15)
+                        .cornerRadius(17)
                         .frame(width: 75, height: 75)
                 },
                 image: {
                     $0.resizable()
                         .renderingMode(.original)
-                        .cornerRadius(15)
+                        .cornerRadius(17)
                         .frame(width: 75, height: 75)
                 }
             )
