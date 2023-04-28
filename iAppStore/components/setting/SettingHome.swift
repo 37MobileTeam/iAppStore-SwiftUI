@@ -66,19 +66,21 @@ struct AppleSubscriptionManagerView: View {
     var body: some View {
         HStack {
             Button(action: {
-                Task {
-                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                        do {
-                            if #available(iOS 15.0, *) {
-                                try await AppStore.showManageSubscriptions(in: windowScene)
-                            } else {
-                                linkPage = LinkString(url: subscriptionsURL)
-                            }
-                        } catch {
-                            linkPage = LinkString(url: subscriptionsURL)
-                        }
-                    }
-                }
+//                if #available(iOS 15.0, *) {
+//                    Task {
+//                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+//                            do {
+//
+//                                try await AppStore.showManageSubscriptions(in: windowScene)
+//
+//                            } catch {
+//                                linkPage = LinkString(url: subscriptionsURL)
+//                            }
+//                        }
+//                    }
+//                } else {
+                    linkPage = LinkString(url: subscriptionsURL)
+//                }
             }) {
                 Text("苹果订阅管理").foregroundColor(Color.primary)
             }
