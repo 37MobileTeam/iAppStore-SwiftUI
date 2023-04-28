@@ -85,7 +85,7 @@ struct AppleSubscriptionManagerView: View {
                 Text("苹果订阅管理").foregroundColor(Color.primary)
             }
             Spacer()
-            Image(systemName: "chevron.right").imageScale(.small).foregroundColor(Color.secondary)
+            Image(systemName: "chevron.right").imageScale(.small).foregroundColor(Color.tsmg_placeholderText)
         }
         .padding([.top, .bottom], 10)
     }
