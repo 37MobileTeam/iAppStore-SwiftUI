@@ -23,7 +23,7 @@ struct AppleServicesView: View {
         "App Store 审核指南": "https://developer.apple.com/cn/app-store/review/guidelines/",
         "Apple Services Status - US": "https://www.apple.com/support/systemstatus/",
         "Apple Services Status - CN": "https://www.apple.com/cn/support/systemstatus/",
-        "Apple System Status": "https://www.apple.com/support/systemstatus/",
+        "Apple System Status - Developer": "https://developer.apple.com/system-status/",
         "Apple 安全性更新": "https://support.apple.com/zh-cn/HT201222",
         "iOS & iPadOS Release Notes": "https://developer.apple.com/documentation/ios-ipados-release-notes",
         "Xcode Release": "https://developer.apple.com/documentation/xcode-release-notes",
