@@ -44,8 +44,8 @@ struct AppleServicesView: View {
         "识别 Mac Pro 机型": "https://support.apple.com/zh-cn/HT201805",
         "识别你的 iMac 机型": "https://support.apple.com/zh-cn/HT201634",
         "识别你的 Apple Watch": "https://support.apple.com/zh-cn/HT204507",
-        "识别你的 AirPods": "https://support.apple.com/zh-cn/HT207010",
-        "识别你的 HomePod": "https://support.apple.com/zh-cn/HT208244",
+        "识别你的 AirPods": "https://support.apple.com/zh-cn/HT209580",
+        "识别你的 HomePod": "https://support.apple.com/zh-cn/HT211109",
         "识别你的 Apple TV": "https://support.apple.com/zh-cn/HT200008"
     ]
 
