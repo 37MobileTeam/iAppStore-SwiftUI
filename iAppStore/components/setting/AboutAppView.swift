@@ -30,12 +30,12 @@ struct AboutAppView: View {
                 .padding([.leading, .trailing], 20).padding(.bottom, 10)
             
             Spacer()
-            Text("由 **37手游iOS‮术技‬运营团队** 发起的开源项目。")
+            Text("由 **37手游移动客户端团队** 发起的开源项目。")
                 .multilineTextAlignment(.center)
                 .font(.subheadline)
                 .padding(.top, 30)
             
-            Text(.init("GitHub: https://github.com/37iOS/iAppStore-SwiftUI"))
+            Text(.init("GitHub: https://github.com/37MobileTeam/iAppStore-SwiftUI"))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
                 .font(.footnote)
