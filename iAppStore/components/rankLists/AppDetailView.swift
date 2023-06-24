@@ -15,6 +15,7 @@ struct AppDetailView: View {
     var item: AppRank?
     
     @StateObject private var appModel = AppDetailModel()
+    @State private var isShowingQRCode = false
     
     var body: some View {
         
@@ -25,8 +26,17 @@ struct AppDetailView: View {
         .navigationBarBackButtonHidden(false)
         .navigationBarItems(trailing:
             Link(destination: URL(string: appModel.app?.trackViewUrl ?? item?.id.label ?? "https://apple.com")!) {
-                Image(systemName: "paperplane").font(.subheadline)
+                Image(systemName: "icloud.and.arrow.down").font(.subheadline)
+            Button(action: {
+                        isShowingQRCode = true
+                    }) {
+                        Image(systemName: "qrcode")
+                            .font(.subheadline)
+                    }
         })
+        .sheet(isPresented: $isShowingQRCode) {
+            QRCodeView(title: "扫一扫下载", subTitle: "App Store 上的“\(item?.imName.label ?? "")”", qrCodeContent: item?.id.label ?? "error", isShowingQRCode: $isShowingQRCode)
+        }
         .onAppear {
             if appModel.app == nil {
                 appModel.searchAppData(appId, nil, regionName)
