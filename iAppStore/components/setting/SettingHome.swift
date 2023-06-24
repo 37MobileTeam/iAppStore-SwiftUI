@@ -29,7 +29,14 @@ struct SettingHome: View {
                         }
                     }
                     
-                    Section(header: Text("苹果服务")) {
+                    Section(header: Text("服务")) {
+                        NavigationLink(destination: AppFavoritesView()) {
+                            HStack {
+                                Text("App 收藏夹")
+                                Spacer()
+                            }
+                            .padding([.top, .bottom], 10)
+                        }
                         NavigationLink(destination: AppleServicesView()) {
                             HStack {
                                 Text("苹果常用网站")
@@ -45,7 +52,7 @@ struct SettingHome: View {
                             Text("关于应用").frame(height: 50)
                         }
                         SettingItemCell(linkPage: $linkPage, title: "GitHub 开源", index: items.count)
-                        SettingItemCell(linkPage: $linkPage, title: "37手游iOS技术运营团队", index: items.count + 1)
+                        SettingItemCell(linkPage: $linkPage, title: "37手游移动客户端团队", index: items.count + 1)
                     }
                 }
             }
@@ -150,7 +157,7 @@ struct SettingItemCell: View {
                     case 4:
                         linkPage = LinkString(url: "https://www.qimai.cn")
                     case 5:
-                        linkPage = LinkString(url: "https://github.com/37iOS/iAppStore-SwiftUI")
+                        linkPage = LinkString(url: "https://github.com/37MobileTeam/iAppStore-SwiftUI")
                     case 6:
                         linkPage = LinkString(url: "https://juejin.cn/user/1002387318511214")
                     default: break

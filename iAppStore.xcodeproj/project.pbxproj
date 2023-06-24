@@ -26,6 +26,9 @@
 		6D738E2E2779736B00A4A76E /* SettingHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D738E2D2779736B00A4A76E /* SettingHome.swift */; };
 		6D738E322779743D00A4A76E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D738E312779743D00A4A76E /* Color.swift */; };
 		6D7A39492A46968100CA7F6E /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A39482A46968100CA7F6E /* QRCodeView.swift */; };
+		6D7A394B2A46BDA900CA7F6E /* AppFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A394A2A46BDA900CA7F6E /* AppFavoritesView.swift */; };
+		6D7A394D2A46C79F00CA7F6E /* AppFavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A394C2A46C79F00CA7F6E /* AppFavoritesModel.swift */; };
+		6D7A394F2A46C7E500CA7F6E /* AppFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A394E2A46C7E500CA7F6E /* AppFavorite.swift */; };
 		6D89AF85277879190075E66F /* iAppStoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89AF84277879190075E66F /* iAppStoreApp.swift */; };
 		6D89AF89277879190075E66F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D89AF88277879190075E66F /* Assets.xcassets */; };
 		6D89AF8C277879190075E66F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D89AF8B277879190075E66F /* Preview Assets.xcassets */; };
@@ -85,6 +88,9 @@
 		6D738E2D2779736B00A4A76E /* SettingHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHome.swift; sourceTree = "<group>"; };
 		6D738E312779743D00A4A76E /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		6D7A39482A46968100CA7F6E /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		6D7A394A2A46BDA900CA7F6E /* AppFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFavoritesView.swift; sourceTree = "<group>"; };
+		6D7A394C2A46C79F00CA7F6E /* AppFavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFavoritesModel.swift; sourceTree = "<group>"; };
+		6D7A394E2A46C7E500CA7F6E /* AppFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFavorite.swift; sourceTree = "<group>"; };
 		6D89AF81277879190075E66F /* iAppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D89AF84277879190075E66F /* iAppStoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iAppStoreApp.swift; sourceTree = "<group>"; };
 		6D89AF88277879190075E66F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -193,6 +199,7 @@
 				6D738E2D2779736B00A4A76E /* SettingHome.swift */,
 				6D26AAC1278420CB003F82BF /* AboutAppView.swift */,
 				6D0809DB29FB576100D12E21 /* AppleServicesView.swift */,
+				6D7A394A2A46BDA900CA7F6E /* AppFavoritesView.swift */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -305,6 +312,7 @@
 				6DB3B789277D748400E8626F /* AppRankModel.swift */,
 				6DB3B78E277D756B00E8626F /* AppDetailModel.swift */,
 				6D490E5927833C4D00B5DD80 /* AppSubscripeModel.swift */,
+				6D7A394C2A46C79F00CA7F6E /* AppFavoritesModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -315,6 +323,7 @@
 				6DB3B790277D757400E8626F /* AppRank.swift */,
 				6D95DC6D27804AAD00EE8B54 /* AppDetail.swift */,
 				6D490E5727833B1C00B5DD80 /* AppSubscripe.swift */,
+				6D7A394E2A46C7E500CA7F6E /* AppFavorite.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -471,6 +480,7 @@
 				6D605A17278B15950001C69F /* ShareSheet.swift in Sources */,
 				6D95DC6B2780292800EE8B54 /* RankCellView.swift in Sources */,
 				6C51177627A2755100D5E21D /* NetworkMonitor.swift in Sources */,
+				6D7A394D2A46C79F00CA7F6E /* AppFavoritesModel.swift in Sources */,
 				6D738E2E2779736B00A4A76E /* SettingHome.swift in Sources */,
 				6D738E2A2779734700A4A76E /* SearchHome.swift in Sources */,
 				6D0809DC29FB576100D12E21 /* AppleServicesView.swift in Sources */,
@@ -490,6 +500,8 @@
 				6C51176C27A00D9C00D5E21D /* LocalFileManager.swift in Sources */,
 				6D605A15278B15850001C69F /* AppContextMenu.swift in Sources */,
 				6DB3B782277D6CE700E8626F /* Constants.swift in Sources */,
+				6D7A394F2A46C7E500CA7F6E /* AppFavorite.swift in Sources */,
+				6D7A394B2A46BDA900CA7F6E /* AppFavoritesView.swift in Sources */,
 				6D490E56278328E400B5DD80 /* SubscriptionAddView.swift in Sources */,
 				6D0809DE29FB5FA500D12E21 /* SafariView.swift in Sources */,
 				6D95DC6E27804AAD00EE8B54 /* AppDetail.swift in Sources */,

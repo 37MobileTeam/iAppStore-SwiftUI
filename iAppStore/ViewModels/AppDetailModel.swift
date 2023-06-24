@@ -63,4 +63,21 @@ class AppDetailModel: ObservableObject {
             }
         }
     }
+    
+    /// looup app id
+    func lookupAppId(_ appId: String, _ regionName: String) {
+        let regionId = TSMGConstants.regionTypeListIds[regionName] ?? "cn"
+        let endpoint = APIService.Endpoint.lookupApp(appid: appId, country: regionId)
+        
+        APIService.shared.POST(endpoint: endpoint, params: nil) { (result: Result<AppDetailM, APIService.APIError>) in
+            switch result {
+            case let .success(response):
+                if let app = response.results.first {
+                    self.results.append(app)
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
 }
