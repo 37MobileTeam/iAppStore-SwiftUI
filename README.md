@@ -54,7 +54,7 @@ TestFlight 下载地址：[https://testflight.apple.com/join/XXEQdVKN](https://t
 | ----- | ----- |
 | ![](screenshot/03.png) | ![](screenshot/04.png) |
 | ![](screenshot/05.png) | ![](screenshot/06.png) |
-| ![](screenshot/07.png) |  |
+| ![](screenshot/07.png) | ![](screenshot/10.png) |
 
 **macOS**
 
