@@ -529,6 +529,11 @@ struct AppDetailFooterCellView: View {
 
 struct AppDetailContentView_Previews: PreviewProvider {
     static var previews: some View {
-        AppDetailContentView()
+        let model = { () -> AppDetailModel in
+            let model = AppDetailModel()
+            model.searchAppData("1669437212", nil, "中国")
+            return model
+        }
+        AppDetailContentView(appModel: model())
     }
 }

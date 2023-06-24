@@ -16,8 +16,6 @@ struct AppDetailView: View {
     
     @StateObject private var appModel = AppDetailModel()
     
-//    @Environment(\.presentationMode) var presentationMode
-    
     var body: some View {
         
         Group {
@@ -25,14 +23,6 @@ struct AppDetailView: View {
         }
         .navigationBarTitle(item?.imName.label ?? appModel.app?.trackName ?? "", displayMode: .large)
         .navigationBarBackButtonHidden(false)
-//        .navigationBarItems(leading:
-//            Button(action: {
-//                self.presentationMode.wrappedValue.dismiss()
-//            }) {
-//                    HStack {
-//                        Image(systemName: "chevron.backward")
-//                    }
-//            })
         .navigationBarItems(trailing:
             Link(destination: URL(string: appModel.app?.trackViewUrl ?? item?.id.label ?? "https://apple.com")!) {
                 Image(systemName: "paperplane").font(.subheadline)
@@ -46,10 +36,8 @@ struct AppDetailView: View {
 }
 
 
-
-
-//struct AppDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppDetailView()
-//    }
-//}
+struct AppDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        AppDetailView(appId: "1669437212", regionName: "中国")
+    }
+}
