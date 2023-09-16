@@ -25,6 +25,8 @@ struct RankSortView: View {
     @State private var sortViewIsExpanded: Bool = false
     @State private var currentSortType: RankSortType = .noneType
     
+    @State private var isViewAppear: Bool = false
+    
     var action: ((_ rankName: String, _ categoryName: String, _ regionName: String) -> Void)?
 
     var body: some View {
@@ -36,10 +38,14 @@ struct RankSortView: View {
                 },
                 label: {
                     sortLabels
+                        .accentColor(Color.tsmg_label)
                 }
             )
             .buttonStyle(PlainButtonStyle())
             .accentColor(.clear)
+        }
+        .onAppear() {
+            isViewAppear = true
         }
         .onDisappear() {
             sortViewIsExpanded = false
@@ -214,10 +220,12 @@ extension RankSortView {
                 Text(regionName)
             }
             
-            if currentSortType == type {
+            if isViewAppear {
                 Image(systemName: "chevron.up")
+                    .scaleEffect(x: 1, y: currentSortType == type ? 1 : -1)
+                    .animation(.easeIn)
             } else {
-                Image(systemName: "chevron.down")
+                Image(systemName: "chevron.up")
             }
         }
         .onTapGesture {
