@@ -30,9 +30,11 @@ struct AppleServicesView: View {
         "iOS & iPadOS 普及率": "https://developer.apple.com/support/app-store/",
         "Software Downloads": "https://developer.apple.com/download/",
         "App Store Connect 帮助": "https://help.apple.com/app-store-connect/",
-        "iOS 16 更新": "https://www.apple.com/ios/ios-16/",
-        "iPadOS 16 更新": "https://www.apple.com/ipados/ipados-16/",
-        "macOS 13 更新": "https://www.apple.com/macos/macos-13/",
+        "iOS 最新系统": "https://www.apple.com/ios/ios-16/",
+        "iPadOS 最新系统": "https://www.apple.com/ipados/ipados-16/",
+        "macOS 最新系统": "https://www.apple.com/macos/macos-13/",
+        "visionOS 最新系统": "https://www.apple.com/visionos/visionos-2/",
+        "watchOS 最新系统": "https://www.apple.com/watchos/watchos-11/",
         "识别你的 iPhone 机型": "https://support.apple.com/zh-cn/HT201296",
         "识别你的 iPad 机型": "https://support.apple.com/zh-cn/HT201471",
         "识别 iPod 机型": "https://support.apple.com/zh-cn/HT204217",
@@ -40,13 +42,14 @@ struct AppleServicesView: View {
         "识别 MacBook Air 机型": "https://support.apple.com/zh-cn/HT201862",
         "识别 MacBook Pro 机型": "https://support.apple.com/zh-cn/HT201300",
         "识别 Mac mini 机型": "https://support.apple.com/zh-cn/HT201894",
-        "识别 Mac Studio 机型": "https://support.apple.com/zh-cn/HT212366",
+        "识别 Mac Studio 机型": "https://support.apple.com/zh-cn/102231",
         "识别 Mac Pro 机型": "https://support.apple.com/zh-cn/HT201805",
         "识别你的 iMac 机型": "https://support.apple.com/zh-cn/HT201634",
         "识别你的 Apple Watch": "https://support.apple.com/zh-cn/HT204507",
         "识别你的 AirPods": "https://support.apple.com/zh-cn/HT209580",
         "识别你的 HomePod": "https://support.apple.com/zh-cn/HT211109",
-        "识别你的 Apple TV": "https://support.apple.com/zh-cn/HT200008"
+        "识别你的 Apple TV": "https://support.apple.com/zh-cn/HT200008",
+        "识别你的 Apple Vision Pro": "https://support.apple.com/zh-cn/117810"
     ]
 
     var body: some View {
